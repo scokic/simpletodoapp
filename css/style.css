@@ -38,6 +38,7 @@ html {
 body {
   margin: 0;
   font-family: "Raleway", sans-serif;
+  font-size: 16px;
 }
 
 ::-webkit-scrollbar {
@@ -152,7 +153,7 @@ header a:hover {
     justify-content: space-between;
     position: fixed;
     top: 15px;
-    left: 35px;
+    left: 20px;
     z-index: 9999;
     cursor: pointer;
   }
@@ -212,6 +213,12 @@ h2 {
 
 .main-container {
   max-width: 500px;
+}
+
+@media screen and (max-width: 700px) {
+  main {
+    padding: 10px;
+  }
 }
 
 /* -------------------------- NEW TASK CONTAINER --------------------------*/
