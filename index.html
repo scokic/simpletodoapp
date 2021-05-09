@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="css/style.css" />
+    <script defer src="js/scripts.js"></script>
+    <script
+      src="https://kit.fontawesome.com/6d1426eb41.js"
+      crossorigin="anonymous"
+    ></script>
+    <title>Simple task</title>
+  </head>
+  <body>
+    <nav id="nav-bar">
+      <a href="#"><i class="fas fa-inbox"></i>Inbox</a>
+      <div class="hamburger-container">
+        <div class="hamburger">
+          <div class="bar bar-1"></div>
+          <div class="bar bar-2"></div>
+          <div class="bar bar-3"></div>
+        </div>
+      </div>
+    </nav>
+
+    <main>
+      <h2><i class="fas fa-inbox"></i>Inbox</h2>
+
+      <form class="new-task-form" onsubmit="addNewTask(this)">
+        <input
+          class="new-task-input"
+          type="text"
+          placeholder="Enter task name"
+        />
+        <button>Create new task</button>
+      </form>
+
+      <div class="tasks-container"></div>
+    </main>
+  </body>
+</html>
