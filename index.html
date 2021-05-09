@@ -3,18 +3,35 @@
   <head>
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1"
+    />
     <link rel="stylesheet" href="css/style.css" />
     <script defer src="js/scripts.js"></script>
     <script
       src="https://kit.fontawesome.com/6d1426eb41.js"
       crossorigin="anonymous"
     ></script>
-    <title>Simple task</title>
+    <link rel="preconnect" href="https://fonts.gstatic.com" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Raleway:wght@300;400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <title>Simple Task</title>
   </head>
   <body>
-    <nav id="nav-bar">
-      <a href="#"><i class="fas fa-inbox"></i>Inbox</a>
+    <header id="nav-bar">
+      <div class="logo-container">
+        <i class="fas fa-check"></i>
+        <p class="logo">Simple Task</p>
+      </div>
+      <nav>
+        <a href="#"><i class="fas fa-inbox"></i>Inbox</a>
+      </nav>
+      <div class="settings">
+        <a href="#"> <i class="fas fa-cog"></i>Settings</a>
+      </div>
       <div class="hamburger-container">
         <div class="hamburger">
           <div class="bar bar-1"></div>
@@ -22,21 +39,38 @@
           <div class="bar bar-3"></div>
         </div>
       </div>
-    </nav>
+    </header>
 
     <main>
-      <h2><i class="fas fa-inbox"></i>Inbox</h2>
+      <h2><i class="fas fa-inbox"></i>All tasks</h2>
 
-      <form class="new-task-form" onsubmit="addNewTask(this)">
-        <input
-          class="new-task-input"
-          type="text"
-          placeholder="Enter task name"
-        />
-        <button>Create new task</button>
-      </form>
+      <div class="main-container">
+        <div class="new-task-container">
+          <button class="new-task-button">
+            <svg>
+              <path
+                d="M6 6V.5a.5.5 0 0 1 1 0V6h5.5a.5.5 0 1 1 0 1H7v5.5a.5.5 0 1 1-1 0V7H.5a.5.5 0 0 1 0-1H6z"
+                fill="currentColor"
+                fill-rule="evenodd"
+              ></path>
+            </svg>
+            Add task
+          </button>
+          <form class="new-task-form" onsubmit="addNewTask(this)">
+            <input
+              class="new-task-input"
+              type="text"
+              placeholder="Enter task name"
+            />
+            <div class="new-task-buttons-container">
+              <button class="add-new-task">Add task</button>
+              <button class="cancel-new-task">Cancel</button>
+            </div>
+          </form>
+        </div>
 
-      <div class="tasks-container"></div>
+        <div class="tasks-container"></div>
+      </div>
     </main>
   </body>
 </html>

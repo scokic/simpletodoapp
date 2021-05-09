@@ -14,9 +14,15 @@ let tasks = [
   { id: 2, name: "Drugi zadatak", status: "" },
 ];
 
-// READ EXISTING TASKS
+// TASK FUNCTIONS ------------------------------------------------------------------------------------------------
 
-let taskList = document.querySelector(".tasks-container");
+const taskList = document.querySelector(".tasks-container");
+const newTaskFormInput = document.querySelector(".new-task-input");
+const newTaskBtn = document.querySelector(".new-task-button");
+const newTaskContainer = document.querySelector(".new-task-container");
+const cancelNewTask = document.querySelector(".cancel-new-task");
+
+// READ EXISTING TASKS
 
 tasks.forEach((task) =>
   taskList.insertAdjacentHTML(
@@ -51,9 +57,24 @@ tasks.forEach((task) =>
 
 // CREATE NEW TASK
 
-function addNewTask() {
-  let newTaskFormInput = document.querySelector(".new-task-input");
+newTaskBtn.addEventListener("click", () => {
+  newTaskContainer.classList.add("new-task-form-open");
+  newTaskFormInput.focus();
+});
 
+cancelNewTask.addEventListener("click", () => {
+  event.preventDefault();
+  newTaskContainer.classList.remove("new-task-form-open");
+});
+
+newTaskContainer.addEventListener("keydown", () => {
+  if (event.key === "Escape") {
+    newTaskContainer.classList.remove("new-task-form-open");
+    newTaskFormInput.value = "";
+  }
+});
+
+function addNewTask() {
   if (newTaskFormInput.value === "") {
     alert("Please name your task");
   } else {
@@ -94,16 +115,15 @@ function addNewTask() {
     );
   }
   newTaskFormInput.value = "";
+
   event.preventDefault();
 }
-
-// TASK FUNCTIONS ------------------------------------------------------------------------------------------------
 
 // DELETE A TASK
 console.log(tasks);
 
 function deleteTask(event) {
-  let id = event.parentElement.id;
+  let id = event.parentElement.parentElement.id;
 
   for (let i = 0; i < tasks.length; i++) {
     if (tasks[i].id == id) {

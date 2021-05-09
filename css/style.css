@@ -1,14 +1,34 @@
 :root {
-  --background-primary: #1e1e1e;
-  --background-secondary: #3e3e3e;
-  --white: #fefefe;
-  --grey: #ccc;
+  --accent: #4977e7;
+  --red: #ff225b;
+  --pink: #ffb3cf;
+  --dark-blue: #31357c;
+
+  --black: #242a33;
+  --grey: #4f5257;
+  --light-grey: #f6f7fb;
+  --light-blue: #d8def9;
+  --white: #ffffff;
+  --almost-white: #fcfdff;
+  --shadow: #242a3325;
+  --shadow-dark: #242a3375;
 
   --menu-width: 200px;
 }
 
+/* :root {
+  --background-primary: #1e1e1e;
+  --background-secondary: #3e3e3e;
+  --white: #fefefe;
+  --grey: #ccc;
+} */
+
 * {
   margin: 0;
+}
+
+*::placeholder {
+  font-size: 0.9rem;
 }
 
 html {
@@ -17,8 +37,7 @@ html {
 
 body {
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen,
-    Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
+  font-family: "Raleway", sans-serif;
 }
 
 ::-webkit-scrollbar {
@@ -38,13 +57,17 @@ body {
 p,
 a,
 i,
+button {
+  color: var(--grey);
+}
+
 h1,
 h2,
 h3,
 h4,
 h5,
 h6 {
-  color: var(--white);
+  color: var(--black);
 }
 
 li {
@@ -53,34 +76,51 @@ li {
 
 /* -------------------------- SIDEBAR --------------------------*/
 
-nav {
+header {
   display: flex;
   flex-direction: column;
-  height: 100vh;
+  height: calc(100vh - 50px);
   width: var(--menu-width);
   position: fixed;
-  background-color: var(--background-primary);
-  padding: 25px 10px;
+  background-color: var(--white);
+  box-shadow: 0px 0px 25px var(--shadow);
+  padding: 25px;
   list-style-type: none;
 }
 
-nav a {
+header a {
   border-radius: 5px;
   padding: 10px;
+  display: block;
   text-decoration: none;
+}
+
+.logo-container {
+  font-weight: bold;
+  font-size: 1.2em;
+  margin-bottom: 15px;
+  padding: 15px;
+  display: flex;
+}
+
+.logo-container > * {
+  color: var(--dark-blue);
+}
+
+nav {
+  flex-grow: 1;
 }
 
 i {
   margin-right: 15px;
 }
 
-nav a:hover {
-  color: var(--grey);
-  background-color: var(--background-secondary);
+header a:hover {
+  background-color: var(--light-blue);
 }
 
 @media only screen and (max-width: 600px) {
-  nav {
+  header {
     position: fixed;
     left: -100%;
     transition: 0.4s ease;
@@ -121,7 +161,7 @@ nav a:hover {
     height: 3px;
     width: 100%;
     border-radius: 2px;
-    background-color: var(--white);
+    background-color: var(--grey);
     transition: 0.5s cubic-bezier(0.5, -1, 0.5, 1.5);
   }
 
@@ -155,26 +195,118 @@ nav a:hover {
 /* -------------------------- MAIN CONTENT --------------------------*/
 
 main {
-  width: calc(100vw - calc(var(--menu-width) + 70px));
+  width: calc(100vw - calc(var(--menu-width) + 100px));
   height: calc(100vh - 50px);
-  margin-left: calc(var(--menu-width) + 20px);
-  background-color: var(--background-secondary);
+  margin-left: calc(var(--menu-width) + 50px);
+  background-color: var(--light-grey);
   padding: 25px;
   display: flex;
   flex-direction: column;
 }
 
-h2,
-.new-task-form {
+h2 {
   margin-bottom: 15px;
   padding: 0px 10px;
   display: flex;
 }
 
-.new-task-name {
-  flex-grow: 1;
-  margin-right: 5px;
+.main-container {
+  max-width: 500px;
 }
+
+/* -------------------------- NEW TASK CONTAINER --------------------------*/
+
+.new-task-container {
+  margin-bottom: 15px;
+  padding: 0px 10px;
+  display: flex;
+  flex-direction: column;
+}
+
+.new-task-container > * {
+  display: flex;
+}
+
+.new-task-button {
+  color: var(--black);
+  font-size: 0.9em;
+  background-color: transparent;
+  border: none;
+  align-items: center;
+  padding: 15px 10px;
+}
+
+.new-task-button svg {
+  height: 13px;
+  width: 13px;
+  margin-right: 15px;
+  border-radius: 15px;
+  padding: 2px;
+}
+
+.new-task-button:hover {
+  color: var(--accent);
+  cursor: pointer;
+  border-radius: 5px;
+}
+
+.new-task-button:hover svg {
+  color: var(--white);
+  background-color: var(--accent);
+}
+
+.new-task-form {
+  display: none;
+  padding: 10px;
+}
+
+.new-task-form-open > .new-task-form {
+  display: block;
+}
+
+.new-task-form-open > .new-task-button {
+  display: none;
+}
+
+.new-task-input {
+  border: none;
+  margin-bottom: 10px;
+  color: var(--black);
+  display: block;
+  box-sizing: border-box;
+  width: 100%;
+  padding: 10px;
+  border-radius: 5px;
+  background-color: var(--white);
+  box-shadow: 0px 0px 3px var(--shadow);
+  transition: 0.1s ease;
+}
+
+.new-task-input:focus-visible {
+  outline: none;
+  box-shadow: 0px 0px 3px var(--shadow-dark);
+}
+
+.add-new-task {
+  background-color: var(--accent);
+  color: white;
+  border: none;
+  padding: 5px 10px;
+  border-radius: 2.5px;
+  font-size: 0.9em;
+}
+
+.cancel-new-task {
+  background-color: transparent;
+  border: none;
+  font-size: 0.9em;
+}
+.cancel-new-task:hover {
+  cursor: pointer;
+  text-decoration: underline;
+}
+
+/* -------------------------- TASKS CONTAINER --------------------------*/
 
 .tasks-container {
   max-height: 100%;
@@ -205,12 +337,17 @@ h2,
   margin: 0;
 }
 
-.task-container button:hover ::before {
+.task-container .edit-task-button:hover ::before {
+  color: blue;
+}
+
+.task-container .delete-task-button:hover ::before {
   color: red;
 }
 
 .task-container:hover {
-  background-color: var(--background-primary);
+  background-color: var(--light-blue);
+  border-radius: 5px;
 }
 
 .task-container p:hover {
@@ -227,7 +364,7 @@ h2,
 }
 
 .edit-open {
-  background-color: var(--background-primary);
+  background-color: var(--light-blue);
 }
 
 .task-edit-container input {
@@ -236,7 +373,7 @@ h2,
 
 .cancel-button,
 .apply-button {
-  color: white;
+  color: var(--grey);
   padding: 3px 7px;
   margin: 5px;
   border-radius: 2px;
