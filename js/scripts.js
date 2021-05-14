@@ -11,6 +11,16 @@ const addNewTaskBtn = document.querySelector(".add-new-task");
 const disabledBtn = document.querySelector(".disabled-button");
 const newTaskForm = document.querySelector(".new-task-form");
 
+const taskList = document.querySelector(".tasks-container");
+const newTaskFormInput = document.querySelector(".new-task-input");
+const newTaskBtn = document.querySelector(".new-task-button");
+const newTaskContainer = document.querySelector(".new-task-container");
+const cancelNewTask = document.querySelector(".cancel-new-task");
+const editTaskInputs = document.querySelectorAll(".edit-task-input");
+
+const hideCompleteBtn = document.querySelector(".hide-completed-filter");
+const showAllTasksBtn = document.querySelector(".show-all-filter");
+
 function toggleMobileNav() {
   nav.classList.toggle("open-menu");
 }
@@ -46,19 +56,15 @@ let tasks = [
 
 // TASK FUNCTIONS ------------------------------------------------------------------------------------------------
 
-const taskList = document.querySelector(".tasks-container");
-const newTaskFormInput = document.querySelector(".new-task-input");
-const newTaskBtn = document.querySelector(".new-task-button");
-const newTaskContainer = document.querySelector(".new-task-container");
-const cancelNewTask = document.querySelector(".cancel-new-task");
-let editTaskInputs = document.querySelectorAll(".edit-task-input");
-
 // READ EXISTING TASKS
 
-tasks.forEach((task) =>
-  taskList.insertAdjacentHTML(
-    "afterbegin",
-    `<li class="task-container" id="${task.id}">
+function readTasks(input) {
+  taskList.innerHTML = "";
+
+  input.forEach((task) =>
+    taskList.insertAdjacentHTML(
+      "afterbegin",
+      `<li class="task-container" id="${task.id}">
       <div class="task-info-container">
         <input
           type="checkbox"
@@ -83,8 +89,13 @@ tasks.forEach((task) =>
         </button>
       </form>
     </li>`
-  )
-);
+    )
+  );
+  hideCompleteBtn.classList.remove("hidden");
+  showAllTasksBtn.classList.add("hidden");
+}
+
+readTasks(tasks);
 
 // CREATE NEW TASK
 
@@ -162,6 +173,7 @@ function disableButton() {
     addNewTaskBtn.classList.add("disabled-button");
     newTaskForm.removeEventListener("click", addNewTask);
   }
+}
 
 // DELETE A TASK
 
@@ -240,4 +252,27 @@ function toggleSidebarShortcut() {
   if (event.key === "m") {
     toggleSidebar();
   }
+}
+
+// FILTER TASKS
+// hide-completed-filter
+
+// dohvati sve taskove
+// filtriraj
+// zameni na frontu
+
+function hideCompletedTasks() {
+  let i;
+  let notCompletedTasks = [];
+
+  for (i = 0; i < tasks.length; i++) {
+    if (tasks[i].status === "") {
+      notCompletedTasks.push(tasks[i]);
+    }
+  }
+
+  taskList.innerHTML = "";
+  readTasks(notCompletedTasks);
+  hideCompleteBtn.classList.add("hidden");
+  showAllTasksBtn.classList.remove("hidden");
 }

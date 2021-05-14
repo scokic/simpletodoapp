@@ -350,8 +350,32 @@ h2 {
 
 /* -------------------------- NEW TASK CONTAINER --------------------------*/
 
+.task-and-filter-container {
+  display: grid;
+  margin-bottom: 10px;
+  grid-template-columns: 1fr auto;
+}
+
+.hide-completed-filter,
+.show-all-filter {
+  margin-top: 5px;
+  margin-bottom: auto;
+  padding: 10px;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 14px;
+}
+
+.hide-completed-filter:hover,
+.show-all-filter:hover {
+  background-color: var(--light-blue);
+}
+
+.task-and-filter-container .hidden {
+  display: none;
+}
+
 .new-task-container {
-  margin-bottom: 15px;
   display: flex;
   flex-direction: column;
 }

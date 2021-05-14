@@ -67,29 +67,37 @@
           <h2><i class="fas fa-inbox"></i>All tasks</h2>
         </div>
 
-        <div class="new-task-container">
-          <button class="new-task-button">
-            <svg>
-              <path
-                d="M6 6V.5a.5.5 0 0 1 1 0V6h5.5a.5.5 0 1 1 0 1H7v5.5a.5.5 0 1 1-1 0V7H.5a.5.5 0 0 1 0-1H6z"
-                fill="currentColor"
-                fill-rule="evenodd"
-              ></path>
-            </svg>
-            Add task
-          </button>
-          <form class="new-task-form" onkeypress="toggleSidebarShortcut()">
-            <input
-              class="new-task-input"
-              type="text"
-              placeholder="Enter task name"
-              oninput="disableButton()"
-            />
-            <div class="new-task-buttons-container">
-              <button class="add-new-task disabled-button">Add task</button>
-              <button class="cancel-new-task">Cancel</button>
-            </div>
-          </form>
+        <div class="task-and-filter-container">
+          <div class="new-task-container">
+            <button class="new-task-button">
+              <svg>
+                <path
+                  d="M6 6V.5a.5.5 0 0 1 1 0V6h5.5a.5.5 0 1 1 0 1H7v5.5a.5.5 0 1 1-1 0V7H.5a.5.5 0 0 1 0-1H6z"
+                  fill="currentColor"
+                  fill-rule="evenodd"
+                ></path>
+              </svg>
+              Add task
+            </button>
+            <form class="new-task-form" onkeypress="toggleSidebarShortcut()">
+              <input
+                class="new-task-input"
+                type="text"
+                placeholder="Enter task name"
+                oninput="disableButton()"
+              />
+              <div class="new-task-buttons-container">
+                <button class="add-new-task disabled-button">Add task</button>
+                <button class="cancel-new-task">Cancel</button>
+              </div>
+            </form>
+          </div>
+          <p class="hide-completed-filter" onclick="hideCompletedTasks()">
+            Hide completed
+          </p>
+          <p class="show-all-filter" onclick="readTasks(tasks)">
+            Show all tasks
+          </p>
         </div>
         <div class="main-container">
           <div class="tasks-container"></div>
