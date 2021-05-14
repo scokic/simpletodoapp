@@ -4,28 +4,44 @@ let iOsHeight = document.body.clientHeight;
 
 // MENU OPEN
 
-const hamburger = document.querySelector(".hamburger-container");
+const hamburger = document.querySelector(".hamburger");
 const nav = document.getElementById("nav-bar");
+const settingsBtn = document.querySelector(".settings");
+const addNewTaskBtn = document.querySelector(".add-new-task");
+const disabledBtn = document.querySelector(".disabled-button");
+const newTaskForm = document.querySelector(".new-task-form");
 
-function openNav() {
+function toggleMobileNav() {
   nav.classList.toggle("open-menu");
+}
+
+// TOGGLE SIDEBAR
+
+function toggleSidebar() {
+  nav.classList.toggle("nav-hidden-desktop");
+}
+
+// OPEN SETTINGS MENU
+
+function openSettings() {
+  settingsBtn.classList.toggle("open");
 }
 
 let tasks = [
   { id: 1, name: "Prvi zadatak", status: "checked" },
   { id: 2, name: "Drugi zadatak", status: "" },
-  { id: 1, name: "Prvi zadatak", status: "checked" },
-  { id: 2, name: "Drugi zadatak", status: "" },
-  { id: 1, name: "Prvi zadatak", status: "checked" },
-  { id: 2, name: "Drugi zadatak", status: "" },
-  { id: 1, name: "Prvi zadatak", status: "checked" },
-  { id: 2, name: "Drugi zadatak", status: "" },
-  { id: 1, name: "Prvi zadatak", status: "checked" },
-  { id: 2, name: "Drugi zadatak", status: "" },
-  { id: 1, name: "Prvi zadatak", status: "checked" },
-  { id: 2, name: "Drugi zadatak", status: "" },
-  { id: 1, name: "Prvi zadatak", status: "checked" },
-  { id: 2, name: "Drugi zadatak", status: "" },
+  { id: 3, name: "Prvi zadatak", status: "checked" },
+  { id: 4, name: "Drugi zadatak", status: "" },
+  { id: 5, name: "Prvi zadatak", status: "checked" },
+  { id: 6, name: "Drugi zadatak", status: "" },
+  { id: 7, name: "Prvi zadatak", status: "checked" },
+  { id: 8, name: "Drugi zadatak", status: "" },
+  { id: 9, name: "Prvi zadatak", status: "checked" },
+  { id: 10, name: "Drugi zadatak", status: "" },
+  { id: 11, name: "Prvi zadatak", status: "checked" },
+  { id: 12, name: "Drugi zadatak", status: "" },
+  { id: 13, name: "Prvi zadatak", status: "checked" },
+  { id: 14, name: "Drugi zadatak", status: "" },
 ];
 
 // TASK FUNCTIONS ------------------------------------------------------------------------------------------------
@@ -58,7 +74,7 @@ tasks.forEach((task) =>
         </button>
       </div>
       <form class="task-edit-container">
-        <input class="edit-task-input" type="text" placeholder="Enter task name" onkeydown="changeCancelOnKeydown(this)" />
+        <input class="edit-task-input" type="text" placeholder="Enter task name" onkeydown="changeCancelOnKeydown(this)" onkeypress="toggleSidebarShortcut()"/>
         <button class="apply-button" onclick="applyChange(this)">
         Apply
         </button>
@@ -73,6 +89,7 @@ tasks.forEach((task) =>
 // CREATE NEW TASK
 
 newTaskBtn.addEventListener("click", () => {
+  event.preventDefault();
   newTaskContainer.classList.add("new-task-form-open");
   newTaskFormInput.focus();
 });
@@ -91,9 +108,7 @@ newTaskContainer.addEventListener("keydown", () => {
 });
 
 function addNewTask() {
-  if (newTaskFormInput.value === "") {
-    alert("Please name your task");
-  } else {
+  if (newTaskFormInput.value !== "") {
     const maxId = Math.max(...tasks.map((o) => o.id), 0);
     let newTask = {
       id: maxId + 1,
@@ -119,7 +134,7 @@ function addNewTask() {
         </button>
       </div>
       <form class="task-edit-container">
-        <input class="edit-task-input" type="text" placeholder="Enter task name" onkeydown="changeCancelOnKeydown(this)" />
+        <input class="edit-task-input" type="text" placeholder="Enter task name" onkeydown="changeCancelOnKeydown(this)" onkeypress="toggleSidebarShortcut()"/>
         <button class="apply-button" onclick="applyChange(this)">
         Apply
         </button>
@@ -130,9 +145,23 @@ function addNewTask() {
     </li>`
     );
   }
+  addNewTaskBtn.classList.add("disabled-button");
+  newTaskForm.removeEventListener("click", addNewTask);
+
   newTaskFormInput.value = "";
   event.preventDefault();
 }
+
+// DISABLE CLICK FUNCTION IF INPUT IS EMPTY
+
+function disableButton() {
+  if (newTaskFormInput.value !== "") {
+    addNewTaskBtn.classList.remove("disabled-button");
+    newTaskForm.addEventListener("click", addNewTask);
+  } else {
+    addNewTaskBtn.classList.add("disabled-button");
+    newTaskForm.removeEventListener("click", addNewTask);
+  }
 
 // DELETE A TASK
 
@@ -177,9 +206,7 @@ function applyChange(submitEvent) {
   let id = submitEvent.parentElement.parentElement.id;
   let input = submitEvent.parentElement.children[0].value;
 
-  if (input === "") {
-    alert("Please name your task");
-  } else {
+  if (input !== "") {
     for (let i = 0; i < tasks.length; i++) {
       if (tasks[i].id == id) {
         tasks[i].name = input;
@@ -209,10 +236,8 @@ function changeCancelOnKeydown(input) {
   }
 }
 
-// OPEN SETTINGS MENU
-
-const settingsButton = document.querySelector(".settings");
-
-function openSettings() {
-  settingsButton.classList.toggle("open");
+function toggleSidebarShortcut() {
+  if (event.key === "m") {
+    toggleSidebar();
+  }
 }

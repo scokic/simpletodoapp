@@ -81,6 +81,8 @@ header {
   box-shadow: 0px 0px 25px var(--shadow);
   padding: 10px;
   list-style-type: none;
+  transition: 0.35s ease;
+  left: 0;
 }
 
 header a {
@@ -129,6 +131,16 @@ header a:hover {
   z-index: 99;
 }
 
+@media only screen and (max-width: 700px) {
+  .settings-modal {
+    bottom: 155;
+  }
+
+  ::-webkit-scrollbar {
+    width: 3px;
+  }
+}
+
 .settings-modal ul {
   padding: 0;
 }
@@ -157,86 +169,96 @@ header a:hover {
   display: block;
 }
 
-@media only screen and (max-width: 600px) {
+@media only screen and (min-width: 701px) {
+  .hamburger-mobile {
+    display: none;
+  }
+
+  .hamburger-desktop {
+    transition: 0.35s ease;
+    display: flex;
+    position: relative;
+    left: calc(var(--menu-width) + 20px);
+  }
+
+  .hamburger-desktop-info {
+    position: absolute;
+    top: 35px;
+    left: 0px;
+    width: 150px;
+    border-radius: 5px;
+    padding: 10px;
+    background-color: var(--grey);
+    display: none;
+  }
+
+  .hamburger-desktop:hover .hamburger-desktop-info {
+    display: block;
+  }
+
+  .hamburger-desktop-info p {
+    color: white;
+    font-size: 14px;
+    z-index: 10;
+  }
+
+  .hamburger-desktop-info::after {
+    content: "";
+    display: block;
+    background-color: var(--grey);
+    height: 15px;
+    width: 15px;
+    top: -5px;
+    left: 5px;
+    position: absolute;
+    z-index: 9;
+    transform: rotate(45deg);
+  }
+
+  .nav-hidden-desktop .hamburger-desktop {
+    left: 20px;
+  }
+
+  .nav-hidden-desktop {
+    left: calc(0px - var(--menu-width));
+  }
+
+  .nav-hidden-desktop ~ main {
+    margin-left: 0;
+    width: 100vw;
+  }
+}
+
+@media only screen and (max-width: 700px) {
+  .hamburger-desktop {
+    display: none;
+  }
+
   header {
     position: fixed;
     left: -100%;
     transition: 0.4s ease;
     box-shadow: 0px 0px 25px rgb(0 0 0 / 50%);
+    padding-top: 50px;
+    padding-bottom: 150px;
   }
 }
 
 /* -------------------------- HAMBURGER & ANIMATION --------------------------*/
 
-.hamburger-container {
+.hamburger-mobile {
   display: none;
+  left: 20px;
 }
 
-@media only screen and (max-width: 600px) {
-  header {
-    padding-top: 50px;
-    padding-bottom: 150px;
-  }
-
+@media only screen and (max-width: 700px) {
   .open-menu {
     left: 0;
     z-index: 99;
   }
 
-  .hamburger-container {
-    display: block;
-  }
-
-  .hamburger {
-    width: 25px;
-    height: 20px;
+  .hamburger-mobile {
     display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    position: fixed;
-    top: 15px;
-    left: 20px;
-    z-index: 9999;
-    cursor: pointer;
-  }
-
-  .open-menu ~ .nav-close {
-    display: block;
-    z-index: 5;
-  }
-
-  .bar {
-    height: 3px;
-    width: 100%;
-    border-radius: 2px;
-    background-color: var(--grey);
-    transition: 0.5s cubic-bezier(0.5, -1, 0.5, 1.5);
-  }
-
-  .open-menu .bar-1 {
-    transform: rotate(-45deg) translate(-6px, 6.5px);
-    -webkit-transform: rotate(-45deg) translate(-6px, 6.5px);
-    -moz-transform: rotate(-360deg) translate(-6px, 6.5px);
-    -ms-transform: rotate(-360deg) translate(-6px, 6.5px);
-    -o-transform: rotate(-360deg) translate(-6px, 6.5px);
-  }
-
-  .open-menu .bar-2 {
-    transform: translateX(-15px);
-    -webkit-transform: translateX(-15px);
-    -moz-transform: translateX(-15px);
-    -ms-transform: translateX(-15px);
-    -o-transform: translateX(-15px);
-    background-color: transparent;
-    box-shadow: none;
-  }
-
-  .open-menu .bar-3 {
-    transform: rotate(45deg) translate(-6px, -6.5px);
-    -webkit-transform: rotate(45deg) translate(-6px, -6.5px);
-    -moz-transform: rotate(360deg) translate(-6px, -6.5px);
-    -ms-transform: rotate(360deg) translate(-6px, -6.5px);
-    -o-transform: rotate(360deg) translate(-6px, -6.5px);
   }
 }
 
@@ -247,10 +269,9 @@ main {
   height: 100vh;
   margin-left: var(--menu-width);
   background-color: var(--light-grey);
-  padding: 25px;
-  display: flex;
-  flex-direction: column;
+  padding: 25px 50px;
   overflow: hidden;
+  transition: 0.35s ease;
 }
 
 h2 {
@@ -260,10 +281,11 @@ h2 {
 }
 
 .home-container {
-  max-width: 500px;
+  max-width: 650px;
   display: flex;
   flex-direction: column;
   max-height: calc(100vh - 2.5em);
+  margin: auto;
 }
 
 .main-container {
@@ -274,6 +296,56 @@ h2 {
   main {
     padding: 10px;
   }
+
+  .open-menu ~ .nav-close {
+    display: block;
+    z-index: 5;
+  }
+}
+
+.hamburger {
+  width: 25px;
+  height: 20px;
+  flex-direction: column;
+  justify-content: space-between;
+  position: fixed;
+  top: 15px;
+  z-index: 9999;
+  cursor: pointer;
+}
+
+.bar {
+  height: 3px;
+  width: 100%;
+  border-radius: 2px;
+  background-color: var(--grey);
+  transition: 0.5s cubic-bezier(0.5, -1, 0.5, 1.5);
+}
+
+.open-menu .bar-1 {
+  transform: rotate(-45deg) translate(-6px, 6.5px);
+  -webkit-transform: rotate(-45deg) translate(-6px, 6.5px);
+  -moz-transform: rotate(-360deg) translate(-6px, 6.5px);
+  -ms-transform: rotate(-360deg) translate(-6px, 6.5px);
+  -o-transform: rotate(-360deg) translate(-6px, 6.5px);
+}
+
+.open-menu .bar-2 {
+  transform: translateX(-15px);
+  -webkit-transform: translateX(-15px);
+  -moz-transform: translateX(-15px);
+  -ms-transform: translateX(-15px);
+  -o-transform: translateX(-15px);
+  background-color: transparent;
+  box-shadow: none;
+}
+
+.open-menu .bar-3 {
+  transform: rotate(45deg) translate(-6px, -6.5px);
+  -webkit-transform: rotate(45deg) translate(-6px, -6.5px);
+  -moz-transform: rotate(360deg) translate(-6px, -6.5px);
+  -ms-transform: rotate(360deg) translate(-6px, -6.5px);
+  -o-transform: rotate(360deg) translate(-6px, -6.5px);
 }
 
 /* -------------------------- NEW TASK CONTAINER --------------------------*/
@@ -387,6 +459,10 @@ input[type="text"]:focus-visible {
   margin-left: 5px;
 }
 
+.disabled-button {
+  background-color: var(--light-blue);
+}
+
 /* -------------------------- TASKS CONTAINER --------------------------*/
 
 .tasks-container {
@@ -480,7 +556,7 @@ input[type="text"]:focus-visible {
   margin-left: 5px;
 }
 
-@media only screen and (max-width: 600px) {
+@media only screen and (max-width: 700px) {
   main {
     margin-left: 0;
     width: auto;

@@ -20,7 +20,7 @@
     />
     <title>Simple Task</title>
   </head>
-  <body>
+  <body onkeypress="toggleSidebarShortcut()">
     <header id="nav-bar">
       <div class="logo-container">
         <i class="fas fa-check"></i>
@@ -45,15 +45,21 @@
         </div>
         <div class="settings-modal-close" onclick="openSettings()"></div>
       </div>
-      <div class="hamburger-container" onclick="openNav()">
-        <div class="hamburger">
-          <div class="bar bar-1"></div>
-          <div class="bar bar-2"></div>
-          <div class="bar bar-3"></div>
+      <div class="hamburger hamburger-mobile" onclick="toggleMobileNav()">
+        <div class="bar bar-1"></div>
+        <div class="bar bar-2"></div>
+        <div class="bar bar-3"></div>
+      </div>
+      <div class="hamburger hamburger-desktop" onclick="toggleSidebar()">
+        <div class="bar bar-1"></div>
+        <div class="bar bar-2"></div>
+        <div class="bar bar-3"></div>
+        <div class="hamburger-desktop-info">
+          <p>Press "m" to toggle sidebar!</p>
         </div>
       </div>
     </header>
-    <div class="nav-close" onclick="openNav()"></div>
+    <div class="nav-close" onclick="toggleMobileNav()"></div>
 
     <main>
       <div class="home-container">
@@ -72,14 +78,15 @@
             </svg>
             Add task
           </button>
-          <form class="new-task-form" onsubmit="addNewTask(this)">
+          <form class="new-task-form" onkeypress="toggleSidebarShortcut()">
             <input
               class="new-task-input"
               type="text"
               placeholder="Enter task name"
+              oninput="disableButton()"
             />
             <div class="new-task-buttons-container">
-              <button class="add-new-task">Add task</button>
+              <button class="add-new-task disabled-button">Add task</button>
               <button class="cancel-new-task">Cancel</button>
             </div>
           </form>
