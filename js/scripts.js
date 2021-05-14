@@ -5,11 +5,23 @@
 const hamburger = document.querySelector(".hamburger-container");
 const nav = document.getElementById("nav-bar");
 
-hamburger.addEventListener("click", () => {
+function openNav() {
   nav.classList.toggle("open-menu");
-});
+}
 
 let tasks = [
+  { id: 1, name: "Prvi zadatak", status: "checked" },
+  { id: 2, name: "Drugi zadatak", status: "" },
+  { id: 1, name: "Prvi zadatak", status: "checked" },
+  { id: 2, name: "Drugi zadatak", status: "" },
+  { id: 1, name: "Prvi zadatak", status: "checked" },
+  { id: 2, name: "Drugi zadatak", status: "" },
+  { id: 1, name: "Prvi zadatak", status: "checked" },
+  { id: 2, name: "Drugi zadatak", status: "" },
+  { id: 1, name: "Prvi zadatak", status: "checked" },
+  { id: 2, name: "Drugi zadatak", status: "" },
+  { id: 1, name: "Prvi zadatak", status: "checked" },
+  { id: 2, name: "Drugi zadatak", status: "" },
   { id: 1, name: "Prvi zadatak", status: "checked" },
   { id: 2, name: "Drugi zadatak", status: "" },
 ];
@@ -21,6 +33,7 @@ const newTaskFormInput = document.querySelector(".new-task-input");
 const newTaskBtn = document.querySelector(".new-task-button");
 const newTaskContainer = document.querySelector(".new-task-container");
 const cancelNewTask = document.querySelector(".cancel-new-task");
+let editTaskInputs = document.querySelectorAll(".edit-task-input");
 
 // READ EXISTING TASKS
 
@@ -34,7 +47,7 @@ tasks.forEach((task) =>
           ${task.status}
           onchange="handleChange(this)" class="task-checkbox"
         />
-        <p class="task-name">${task.name}</p>
+        <p class="task-name" onclick="editTask(this)">${task.name}</p>
         <button class="edit-task-button" onclick="editTask(this)">
           <i class="fas fa-pen"></i>
         </button>
@@ -43,7 +56,7 @@ tasks.forEach((task) =>
         </button>
       </div>
       <form class="task-edit-container">
-        <input type="text" placeholder="Enter task name"/>
+        <input class="edit-task-input" type="text" placeholder="Enter task name" onkeydown="changeCancelOnKeydown(this)" />
         <button class="apply-button" onclick="applyChange(this)">
         Apply
         </button>
@@ -65,6 +78,7 @@ newTaskBtn.addEventListener("click", () => {
 cancelNewTask.addEventListener("click", () => {
   event.preventDefault();
   newTaskContainer.classList.remove("new-task-form-open");
+  newTaskFormInput.value = "";
 });
 
 newTaskContainer.addEventListener("keydown", () => {
@@ -94,7 +108,7 @@ function addNewTask() {
           ${newTask.status}
           onchange="handleChange(this)" class="task-checkbox"
         />
-        <p class="task-name">${newTask.name}</p>
+        <p class="task-name" onclick="editTask(this)">${newTask.name}</p>
         <button class="edit-task-button" onclick="editTask(this)">
           <i class="fas fa-pen"></i>
         </button>
@@ -103,7 +117,7 @@ function addNewTask() {
         </button>
       </div>
       <form class="task-edit-container">
-        <input type="text" placeholder="Enter task name"/>
+        <input class="edit-task-input" type="text" placeholder="Enter task name" onkeydown="changeCancelOnKeydown(this)" />
         <button class="apply-button" onclick="applyChange(this)">
         Apply
         </button>
@@ -115,15 +129,15 @@ function addNewTask() {
     );
   }
   newTaskFormInput.value = "";
-
   event.preventDefault();
 }
 
 // DELETE A TASK
-console.log(tasks);
 
 function deleteTask(event) {
   let id = event.parentElement.parentElement.id;
+
+  event.parentElement.parentElement.classList.remove("edit-open");
 
   for (let i = 0; i < tasks.length; i++) {
     if (tasks[i].id == id) {
@@ -137,13 +151,14 @@ function deleteTask(event) {
 
 function handleChange(event) {
   let id = event.parentElement.parentElement.id;
+  let status;
 
   for (let i = 0; i < tasks.length; i++) {
     if (tasks[i].id == id) {
       if (tasks[i].status === "checked") {
-        let status = (tasks[i].status = "");
+        status = tasks[i].status = "";
       } else {
-        let status = (tasks[i].status = "checked");
+        status = tasks[i].status = "checked";
       }
     }
   }
@@ -166,12 +181,12 @@ function applyChange(submitEvent) {
     for (let i = 0; i < tasks.length; i++) {
       if (tasks[i].id == id) {
         tasks[i].name = input;
-        submitEvent.parentElement.parentElement.children[0].children[1].textContent = input;
+        submitEvent.parentElement.parentElement.children[0].children[1].textContent =
+          input;
 
         submitEvent.parentElement.children[0].value = "";
-        let task = submitEvent.parentElement.parentElement.classList.remove(
-          "edit-open"
-        );
+        let task =
+          submitEvent.parentElement.parentElement.classList.remove("edit-open");
       }
     }
   }
@@ -182,4 +197,20 @@ function cancelChange(cancelEvent) {
   cancelEvent.parentElement.children[0].value = "";
   cancelEvent.parentElement.parentElement.classList.remove("edit-open");
   event.preventDefault();
+}
+
+function changeCancelOnKeydown(input) {
+  if (event.key === "Escape") {
+    input.value = "";
+    input.parentElement.parentElement.classList.remove("edit-open");
+    event.preventDefault();
+  }
+}
+
+// OPEN SETTINGS MENU
+
+const settingsButton = document.querySelector(".settings");
+
+function openSettings() {
+  settingsButton.classList.toggle("open");
 }

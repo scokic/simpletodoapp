@@ -13,26 +13,16 @@
   --shadow: #242a3325;
   --shadow-dark: #242a3375;
 
-  --menu-width: 200px;
+  --menu-width: 250px;
 }
-
-/* :root {
-  --background-primary: #1e1e1e;
-  --background-secondary: #3e3e3e;
-  --white: #fefefe;
-  --grey: #ccc;
-} */
 
 * {
   margin: 0;
+  box-sizing: border-box;
 }
 
 *::placeholder {
   font-size: 0.9rem;
-}
-
-html {
-  box-sizing: border-box;
 }
 
 body {
@@ -42,7 +32,7 @@ body {
 }
 
 ::-webkit-scrollbar {
-  width: 10px;
+  width: 8px;
 }
 ::-webkit-scrollbar-track {
   background: transparent;
@@ -60,6 +50,10 @@ a,
 i,
 button {
   color: var(--grey);
+}
+
+a {
+  cursor: pointer;
 }
 
 h1,
@@ -80,12 +74,12 @@ li {
 header {
   display: flex;
   flex-direction: column;
-  height: calc(100vh - 50px);
+  height: 100vh;
   width: var(--menu-width);
   position: fixed;
   background-color: var(--white);
   box-shadow: 0px 0px 25px var(--shadow);
-  padding: 25px;
+  padding: 10px;
   list-style-type: none;
 }
 
@@ -113,11 +107,54 @@ nav {
 }
 
 i {
-  margin-right: 15px;
+  margin-right: 10px;
 }
 
 header a:hover {
   background-color: var(--light-blue);
+}
+
+.settings-modal {
+  flex-direction: column;
+  padding: 10px;
+  background-color: var(--white);
+  box-shadow: 0px 0px 25px var(--shadow);
+  border-radius: 5px;
+  width: 250px;
+  position: fixed;
+  bottom: 55px;
+  left: 10px;
+  display: none;
+  transition: 0.2s ease;
+  z-index: 99;
+}
+
+.settings-modal ul {
+  padding: 0;
+}
+
+.settings-modal li a {
+  padding-left: 33px;
+}
+
+.settings-modal-close,
+.nav-close {
+  height: 100vh;
+  width: 100vw;
+  position: fixed;
+  top: 0;
+  left: 0;
+  display: none;
+  background-color: var(--shadow);
+  transition: 0.2s ease;
+}
+
+.settings.open .settings-modal {
+  display: flex;
+}
+
+.settings.open .settings-modal-close {
+  display: block;
 }
 
 @media only screen and (max-width: 600px) {
@@ -136,9 +173,13 @@ header a:hover {
 }
 
 @media only screen and (max-width: 600px) {
+  header {
+    padding-top: 50px;
+  }
+
   .open-menu {
     left: 0;
-    padding-top: 50px;
+    z-index: 99;
   }
 
   .hamburger-container {
@@ -156,6 +197,11 @@ header a:hover {
     left: 20px;
     z-index: 9999;
     cursor: pointer;
+  }
+
+  .open-menu ~ .nav-close {
+    display: block;
+    z-index: 5;
   }
 
   .bar {
@@ -196,23 +242,31 @@ header a:hover {
 /* -------------------------- MAIN CONTENT --------------------------*/
 
 main {
-  width: calc(100vw - calc(var(--menu-width) + 100px));
-  height: calc(100vh - 50px);
-  margin-left: calc(var(--menu-width) + 50px);
+  width: calc(100vw - var(--menu-width));
+  height: 100vh;
+  margin-left: var(--menu-width);
   background-color: var(--light-grey);
   padding: 25px;
   display: flex;
   flex-direction: column;
+  overflow: hidden;
 }
 
 h2 {
   margin-bottom: 15px;
   padding: 0px 10px;
+  font-size: 1.5em;
+}
+
+.home-container {
+  max-width: 500px;
   display: flex;
+  flex-direction: column;
+  max-height: calc(100vh - 2.5em);
 }
 
 .main-container {
-  max-width: 500px;
+  overflow-y: scroll;
 }
 
 @media screen and (max-width: 700px) {
@@ -225,7 +279,6 @@ h2 {
 
 .new-task-container {
   margin-bottom: 15px;
-  padding: 0px 10px;
   display: flex;
   flex-direction: column;
 }
@@ -244,10 +297,10 @@ h2 {
 }
 
 .new-task-button svg {
-  height: 13px;
-  width: 13px;
+  height: 17px;
+  width: 17px;
   margin-right: 15px;
-  border-radius: 15px;
+  border-radius: 50%;
   padding: 2px;
 }
 
@@ -275,9 +328,8 @@ h2 {
   display: none;
 }
 
-.new-task-input {
+input[type="text"] {
   border: none;
-  margin-bottom: 10px;
   color: var(--black);
   display: block;
   box-sizing: border-box;
@@ -289,12 +341,17 @@ h2 {
   transition: 0.1s ease;
 }
 
-.new-task-input:focus-visible {
+input[type="text"]:focus-visible {
   outline: none;
   box-shadow: 0px 0px 3px var(--shadow-dark);
 }
 
-.add-new-task {
+.new-task-buttons-container {
+  margin-top: 10px;
+}
+
+.add-new-task,
+.apply-button {
   background-color: var(--accent);
   color: white;
   border: none;
@@ -303,21 +360,36 @@ h2 {
   font-size: 0.9em;
 }
 
-.cancel-new-task {
+.cancel-new-task,
+.cancel-button {
   background-color: transparent;
   border: none;
+  padding: 5px 10px;
   font-size: 0.9em;
+  border-radius: 2.5px;
 }
-.cancel-new-task:hover {
+
+.add-new-task:hover,
+.apply-button:hover {
+  cursor: pointer;
+}
+
+.cancel-new-task:hover,
+.cancel-button:hover {
   cursor: pointer;
   text-decoration: underline;
+  background-color: rgb(218, 67, 67);
+  color: white;
+}
+
+.cancel-button {
+  margin-left: 5px;
 }
 
 /* -------------------------- TASKS CONTAINER --------------------------*/
 
 .tasks-container {
-  max-height: 100%;
-  overflow-y: auto;
+  overflow-y: scroll;
 }
 
 .task-info-container,
@@ -344,12 +416,25 @@ h2 {
   margin: 0;
 }
 
+.task-container .edit-task-button,
+.task-container .delete-task-button {
+  padding: 0;
+}
+
+.task-container .edit-task-button ::before,
+.task-container .delete-task-button ::before {
+  border-radius: 5px;
+  padding: 7px;
+}
+
 .task-container .edit-task-button:hover ::before {
   color: blue;
+  background-color: var(--shadow);
 }
 
 .task-container .delete-task-button:hover ::before {
   color: red;
+  background-color: var(--shadow);
 }
 
 .task-container:hover {
@@ -363,35 +448,35 @@ h2 {
 }
 
 .task-edit-container {
-  display: none;
+  display: flex;
+  height: 0;
+  padding: 0px 10px;
+  overflow: hidden;
+  transition: 0.075s ease;
 }
 
 .edit-open .task-edit-container {
-  display: flex;
+  height: auto;
+  padding: 10px;
 }
 
 .edit-open {
   background-color: var(--light-blue);
+  border-radius: 5px;
 }
 
-.task-edit-container input {
+.task-edit-container input[type="text"] {
   flex-grow: 1;
 }
 
-.cancel-button,
-.apply-button {
-  color: var(--grey);
-  padding: 3px 7px;
-  margin: 5px;
-  border-radius: 2px;
-}
-
-.cancel-button:hover {
-  background-color: lightpink;
-}
-
-.apply-button:hover {
-  background-color: lightseagreen;
+.task-edit-container .apply-button {
+  background-color: var(--accent);
+  color: white;
+  border: none;
+  padding: 5px 10px;
+  border-radius: 2.5px;
+  font-size: 0.9em;
+  margin-left: 5px;
 }
 
 @media only screen and (max-width: 600px) {
@@ -399,6 +484,6 @@ h2 {
     margin-left: 0;
     width: auto;
     padding-top: 50px;
-    height: calc(100vh - 75px);
+    height: 100vh;
   }
 }
