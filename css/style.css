@@ -175,6 +175,7 @@ header a:hover {
 @media only screen and (max-width: 600px) {
   header {
     padding-top: 50px;
+    padding-bottom: 50px;
   }
 
   .open-menu {

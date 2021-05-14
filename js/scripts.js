@@ -1,5 +1,7 @@
 "use strict";
 
+let iOsHeight = document.body.clientHeight;
+
 // MENU OPEN
 
 const hamburger = document.querySelector(".hamburger-container");
