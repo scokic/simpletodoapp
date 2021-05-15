@@ -1,6 +1,6 @@
 "use strict";
 
-// TEST PWA
+// PWA SETUP
 
 window.addEventListener("load", () => {
   registerSW();
@@ -209,7 +209,7 @@ function closeNewTaskModal() {
   }
 }
 
-// TEST
+// THIS NEEDS TO BE CLEANED - Not following DRY
 
 function addNewTaskModal() {
   if (newTaskModalInput.value !== "") {
@@ -257,14 +257,6 @@ function addNewTaskModal() {
   event.preventDefault();
 }
 
-// TEST KRAJ
-
-// function toggleSidebarShortcut() {
-//   if (event.key === "n") {
-//     toggleSidebar();
-//   }
-// }
-
 // DISABLE CLICK FUNCTION IF INPUT IS EMPTY
 
 function disableButton() {
@@ -286,6 +278,8 @@ function disableModalButton() {
     newTaskModalForm.removeEventListener("click", addNewTaskModal);
   }
 }
+
+cancelNewTaskModal.addEventListener("click", hideNewTaskModal);
 
 // DELETE A TASK
 

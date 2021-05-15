@@ -242,6 +242,11 @@ header a:hover {
     padding-top: 50px;
     padding-bottom: 150px;
   }
+
+  .settings {
+    position: absolute;
+    bottom: 25px;
+  }
 }
 
 /* -------------------------- HAMBURGER & ANIMATION --------------------------*/
