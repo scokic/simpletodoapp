@@ -41,6 +41,9 @@ const newTaskModalClose = document.querySelector(".new-task-modal-close");
 const newTaskModalInput = document.querySelector(".new-task-modal-input");
 const addNewTaskBtnModal = document.querySelector(".add-new-task-modal");
 const cancelNewTaskModal = document.querySelector(".cancel-new-task-modal");
+let tasks = [];
+
+getTasks();
 
 function toggleMobileNav() {
   nav.classList.toggle("open-menu");
@@ -57,23 +60,6 @@ function toggleSidebar() {
 function openSettings() {
   settingsBtn.classList.toggle("open");
 }
-
-let tasks = [
-  { id: 1, name: "Prvi zadatak", status: "checked" },
-  { id: 2, name: "Drugi zadatak", status: "" },
-  { id: 3, name: "Prvi zadatak", status: "checked" },
-  { id: 4, name: "Drugi zadatak", status: "" },
-  { id: 5, name: "Prvi zadatak", status: "checked" },
-  { id: 6, name: "Drugi zadatak", status: "" },
-  { id: 7, name: "Prvi zadatak", status: "checked" },
-  { id: 8, name: "Drugi zadatak", status: "" },
-  { id: 9, name: "Prvi zadatak", status: "checked" },
-  { id: 10, name: "Drugi zadatak", status: "" },
-  { id: 11, name: "Prvi zadatak", status: "checked" },
-  { id: 12, name: "Drugi zadatak", status: "" },
-  { id: 13, name: "Prvi zadatak", status: "checked" },
-  { id: 14, name: "Drugi zadatak", status: "" },
-];
 
 // TASK FUNCTIONS ------------------------------------------------------------------------------------------------
 
@@ -178,7 +164,9 @@ function addNewTask() {
       </form>
     </li>`
     );
+    saveTasks();
   }
+
   newTaskModal.classList.add("hidden");
   addNewTaskBtn.classList.add("disabled-button");
   newTaskForm.removeEventListener("click", addNewTask);
@@ -248,6 +236,7 @@ function addNewTaskModal() {
       </form>
     </li>`
     );
+    saveTasks();
     newTaskModal.classList.add("hidden");
     addNewTaskBtnModal.classList.add("disabled-button");
     newTaskModalForm.removeEventListener("click", addNewTask);
@@ -294,6 +283,7 @@ function deleteTask(event) {
       event.parentElement.remove();
     }
   }
+  saveTasks();
 }
 
 // MARK TASK AS DONE
@@ -311,6 +301,7 @@ function handleChange(event) {
       }
     }
   }
+  saveTasks();
 }
 
 // EDIT TASK NAME
@@ -337,6 +328,7 @@ function applyChange(submitEvent) {
       }
     }
   }
+  saveTasks();
   event.preventDefault();
 }
 
@@ -376,4 +368,21 @@ function hideCompletedTasks() {
   readTasks(notCompletedTasks);
   hideCompleteBtn.classList.add("hidden");
   showAllTasksBtn.classList.remove("hidden");
+}
+
+// LOCAL STORAGE TEST
+
+console.log(tasks);
+
+function saveTasks() {
+  var str = JSON.stringify(tasks);
+  localStorage.setItem("tasks", str);
+}
+
+function getTasks() {
+  var str = localStorage.getItem("tasks");
+  tasks = JSON.parse(str);
+  if (!tasks) {
+    tasks = [];
+  }
 }
