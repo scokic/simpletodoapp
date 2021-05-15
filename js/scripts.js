@@ -20,6 +20,13 @@ const editTaskInputs = document.querySelectorAll(".edit-task-input");
 
 const hideCompleteBtn = document.querySelector(".hide-completed-filter");
 const showAllTasksBtn = document.querySelector(".show-all-filter");
+const newTaskBtnGlobal = document.querySelector(".new-task-button-global");
+const newTaskModal = document.querySelector(".new-task-modal");
+const newTaskModalForm = document.querySelector(".new-task-modal-form");
+const newTaskModalClose = document.querySelector(".new-task-modal-close");
+const newTaskModalInput = document.querySelector(".new-task-modal-input");
+const addNewTaskBtnModal = document.querySelector(".add-new-task-modal");
+const cancelNewTaskModal = document.querySelector(".cancel-new-task-modal");
 
 function toggleMobileNav() {
   nav.classList.toggle("open-menu");
@@ -91,6 +98,7 @@ function readTasks(input) {
     </li>`
     )
   );
+
   hideCompleteBtn.classList.remove("hidden");
   showAllTasksBtn.classList.add("hidden");
 }
@@ -109,6 +117,7 @@ cancelNewTask.addEventListener("click", () => {
   event.preventDefault();
   newTaskContainer.classList.remove("new-task-form-open");
   newTaskFormInput.value = "";
+  newTaskModal.classList.add("hidden");
 });
 
 newTaskContainer.addEventListener("keydown", () => {
@@ -156,12 +165,91 @@ function addNewTask() {
     </li>`
     );
   }
+  newTaskModal.classList.add("hidden");
   addNewTaskBtn.classList.add("disabled-button");
   newTaskForm.removeEventListener("click", addNewTask);
 
   newTaskFormInput.value = "";
   event.preventDefault();
 }
+
+// CREATE NEW TASK FROM MODAL
+
+newTaskBtnGlobal.addEventListener("click", showNewTaskModal);
+
+function showNewTaskModal() {
+  newTaskModal.classList.remove("hidden");
+  newTaskModalInput.focus();
+}
+
+newTaskModalClose.addEventListener("click", hideNewTaskModal);
+
+function hideNewTaskModal() {
+  newTaskModal.classList.add("hidden");
+  newTaskModalInput.value = "";
+}
+
+function closeNewTaskModal() {
+  if (event.key === "Escape") {
+    hideNewTaskModal();
+  }
+}
+
+// TEST
+
+function addNewTaskModal() {
+  if (newTaskModalInput.value !== "") {
+    const maxId = Math.max(...tasks.map((o) => o.id), 0);
+    let newTask = {
+      id: maxId + 1,
+      name: `${newTaskModalInput.value}`,
+      status: "",
+    };
+    tasks.push(newTask);
+    taskList.insertAdjacentHTML(
+      "afterbegin",
+      `<li class="task-container" id="${newTask.id}">
+      <div class="task-info-container">
+        <input
+          type="checkbox"
+          ${newTask.status}
+          onchange="handleChange(this)" class="task-checkbox"
+        />
+        <p class="task-name" onclick="editTask(this)">${newTask.name}</p>
+        <button class="edit-task-button" onclick="editTask(this)">
+          <i class="fas fa-pen"></i>
+        </button>
+        <button class="delete-task-button" onclick="deleteTask(this)">
+          <i class="fas fa-trash"></i>
+        </button>
+      </div>
+      <form class="task-edit-container">
+        <input class="edit-task-input" type="text" placeholder="Enter task name" onkeydown="changeCancelOnKeydown(this)" onkeypress="toggleSidebarShortcut()"/>
+        <button class="apply-button" onclick="applyChange(this)">
+        Apply
+        </button>
+        <button class="cancel-button" onclick="cancelChange(this)">
+          Cancel
+        </button>
+      </form>
+    </li>`
+    );
+    newTaskModal.classList.add("hidden");
+    addNewTaskBtnModal.classList.add("disabled-button");
+    newTaskModalForm.removeEventListener("click", addNewTask);
+
+    newTaskModalInput.value = "";
+  }
+  event.preventDefault();
+}
+
+// TEST KRAJ
+
+// function toggleSidebarShortcut() {
+//   if (event.key === "n") {
+//     toggleSidebar();
+//   }
+// }
 
 // DISABLE CLICK FUNCTION IF INPUT IS EMPTY
 
@@ -172,6 +260,16 @@ function disableButton() {
   } else {
     addNewTaskBtn.classList.add("disabled-button");
     newTaskForm.removeEventListener("click", addNewTask);
+  }
+}
+
+function disableModalButton() {
+  if (newTaskModalInput.value !== "") {
+    addNewTaskBtnModal.classList.remove("disabled-button");
+    newTaskModalForm.addEventListener("click", addNewTaskModal);
+  } else {
+    addNewTaskBtnModal.classList.add("disabled-button");
+    newTaskModalForm.removeEventListener("click", addNewTaskModal);
   }
 }
 
@@ -254,12 +352,7 @@ function toggleSidebarShortcut() {
   }
 }
 
-// FILTER TASKS
-// hide-completed-filter
-
-// dohvati sve taskove
-// filtriraj
-// zameni na frontu
+// FILTER COMPLETED TASKS
 
 function hideCompletedTasks() {
   let i;

@@ -61,6 +61,34 @@
     </header>
     <div class="nav-close" onclick="toggleMobileNav()"></div>
 
+    <div class="new-task-modal hidden">
+      <i
+        class="fas fa-plus new-task-button-global"
+        onclick="showNewTaskModal()"
+      ></i>
+      <div class="new-task-modal-form">
+        <form
+          class="new-task-form-modal"
+          onkeypress="toggleSidebarShortcut()"
+          onsubmit="addNewTaskModal()"
+        >
+          <h4 class="new-task-form-title">Create new task</h4>
+          <input
+            class="new-task-modal-input"
+            type="text"
+            placeholder="Enter task name"
+            oninput="disableModalButton()"
+            onkeydown="closeNewTaskModal()"
+          />
+          <div class="new-task-buttons-container">
+            <button class="add-new-task-modal disabled-button">Add task</button>
+            <button class="cancel-new-task-modal">Cancel</button>
+          </div>
+        </form>
+      </div>
+      <div class="new-task-modal-close"></div>
+    </div>
+
     <main>
       <div class="home-container">
         <div class="header-container">

@@ -360,6 +360,7 @@ h2 {
 .show-all-filter {
   margin-top: 5px;
   margin-bottom: auto;
+  margin-right: 20px;
   padding: 10px;
   border-radius: 5px;
   cursor: pointer;
@@ -448,7 +449,8 @@ input[type="text"]:focus-visible {
 }
 
 .add-new-task,
-.apply-button {
+.apply-button,
+.add-new-task-modal {
   background-color: var(--accent);
   color: white;
   border: none;
@@ -458,7 +460,8 @@ input[type="text"]:focus-visible {
 }
 
 .cancel-new-task,
-.cancel-button {
+.cancel-button,
+.cancel-new-task-modal {
   background-color: transparent;
   border: none;
   padding: 5px 10px;
@@ -467,12 +470,15 @@ input[type="text"]:focus-visible {
 }
 
 .add-new-task:hover,
-.apply-button:hover {
+.add-new-task-modal,
+.apply-button:hover,
+.cancel-new-task-modal:hover {
   cursor: pointer;
 }
 
 .cancel-new-task:hover,
-.cancel-button:hover {
+.cancel-button:hover,
+.cancel-new-task-modal:hover {
   cursor: pointer;
   text-decoration: underline;
   background-color: rgb(218, 67, 67);
@@ -485,6 +491,76 @@ input[type="text"]:focus-visible {
 
 .disabled-button {
   background-color: var(--light-blue);
+}
+
+/* -------------------------- NEW TASK MODAL --------------------------*/
+
+.new-task-modal.hidden > .new-task-modal-form,
+.new-task-modal.hidden > .new-task-modal-close {
+  display: none;
+}
+
+.new-task-modal i {
+  position: fixed;
+  bottom: 25px;
+  right: 25px;
+  display: grid;
+  width: 40px;
+  height: 40px;
+  place-items: center;
+  text-decoration: none;
+  color: white;
+  padding: 10px;
+  background-color: var(--accent);
+  border-radius: 50px;
+  cursor: pointer;
+}
+
+.new-task-modal-form {
+  position: fixed;
+  top: 50%;
+  transform: translateY(-50%) translateX(-50%);
+  left: 50%;
+  z-index: 95;
+}
+
+.new-task-form-title {
+  margin-bottom: 10px;
+  font-weight: 550;
+  font-size: 1em;
+  color: var(--grey);
+}
+
+.new-task-modal-form {
+  background-color: white;
+  display: block;
+  width: 500px;
+  border-radius: 5px;
+  padding: 15px;
+  z-index: 100;
+}
+
+.new-task-modal-close {
+  position: fixed;
+  height: 100vh;
+  width: 100vw;
+  top: 0;
+  left: 0;
+  background-color: var(--shadow-dark);
+  display: block;
+  z-index: 90;
+}
+
+@media only screen and (max-width: 700px) {
+  .new-task-modal-form {
+    width: 90vw;
+  }
+  .new-task-modal i {
+    height: 50px;
+    width: 50px;
+    left: 50vw;
+    transform: translateX(-50%);
+  }
 }
 
 /* -------------------------- TASKS CONTAINER --------------------------*/
