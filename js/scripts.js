@@ -41,8 +41,10 @@ const newTaskModalClose = document.querySelector(".new-task-modal-close");
 const newTaskModalInput = document.querySelector(".new-task-modal-input");
 const addNewTaskBtnModal = document.querySelector(".add-new-task-modal");
 const cancelNewTaskModal = document.querySelector(".cancel-new-task-modal");
-let tasks = [];
 
+// LOCAL STORAGE INITIALIZATION
+
+let tasks = [];
 getTasks();
 
 function toggleMobileNav() {
@@ -370,7 +372,7 @@ function hideCompletedTasks() {
   showAllTasksBtn.classList.remove("hidden");
 }
 
-// LOCAL STORAGE TEST
+// LOCAL STORAGE
 
 console.log(tasks);
 
