@@ -1,20 +1,35 @@
-:root {
+body {
   --accent: #4977e7;
-  --red: #ff225b;
-  --pink: #ffb3cf;
-  --dark-blue: #31357c;
+  --accent-red: #ff225b;
 
-  --black: #242a33;
-  --grey: #4f5257;
-  --medium-grey: #a3a5aa;
-  --light-grey: #f6f7fb;
-  --light-blue: #d8def9;
-  --white: #ffffff;
-  --almost-white: #fcfdff;
+  --primary: #ffffff;
+  --primary-very-strong: #fcfdff;
+  --primary-strong: #242a33;
+  --primary-medium: #a3a5aa;
+  --primary-light: #4f5257;
+  --secondary-light: #f6f7fb;
+  --secondary-blue-tint: #d8def9;
+
   --shadow: #242a3325;
   --shadow-dark: #242a3375;
 
   --menu-width: 250px;
+}
+
+body.dark {
+  --accent: #1d5ce2;
+  --accent-red: #ff225b;
+
+  --primary: #061119;
+  --primary-very-strong: #0a1c29;
+  --primary-strong: #fcfdff;
+  --primary-medium: #6d6f72;
+  --primary-light: #fcfdff;
+  --secondary-light: #0c1b28;
+  --secondary-blue-tint: #12283b;
+
+  --shadow: #00000050;
+  --shadow-dark: #00000099;
 }
 
 * {
@@ -53,7 +68,7 @@ p,
 a,
 i,
 button {
-  color: var(--grey);
+  color: var(--primary-light);
 }
 
 a {
@@ -66,7 +81,7 @@ h3,
 h4,
 h5,
 h6 {
-  color: var(--black);
+  color: var(--primary-strong);
 }
 
 li {
@@ -81,7 +96,7 @@ header {
   height: 100vh;
   width: var(--menu-width);
   position: fixed;
-  background-color: var(--white);
+  background-color: var(--primary);
   box-shadow: 0px 0px 25px var(--shadow);
   padding: 10px;
   list-style-type: none;
@@ -105,7 +120,7 @@ header a {
 }
 
 .logo-container > * {
-  color: var(--dark-blue);
+  color: var(--accent);
 }
 
 nav {
@@ -117,13 +132,13 @@ i {
 }
 
 header a:hover {
-  background-color: var(--light-blue);
+  background-color: var(--secondary-blue-tint);
 }
 
 .settings-modal {
   flex-direction: column;
   padding: 10px;
-  background-color: var(--white);
+  background-color: var(--primary);
   box-shadow: 0px 0px 25px var(--shadow);
   border-radius: 5px;
   width: 250px;
@@ -151,6 +166,7 @@ header a:hover {
 
 .settings-modal li a {
   padding-left: 33px;
+  padding-right: 33px;
 }
 
 .settings-modal-close,
@@ -192,7 +208,7 @@ header a:hover {
     width: 150px;
     border-radius: 5px;
     padding: 10px;
-    background-color: var(--grey);
+    background-color: var(--primary-light);
     display: none;
   }
 
@@ -201,7 +217,7 @@ header a:hover {
   }
 
   .hamburger-desktop-info p {
-    color: white;
+    color: var(--primary);
     font-size: 14px;
     z-index: 10;
   }
@@ -209,7 +225,7 @@ header a:hover {
   .hamburger-desktop-info::after {
     content: "";
     display: block;
-    background-color: var(--grey);
+    background-color: var(--primary-light);
     height: 15px;
     width: 15px;
     top: -5px;
@@ -253,6 +269,33 @@ header a:hover {
   }
 }
 
+.dark-theme-toggle-container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.dark-theme-toggle {
+  background-color: var(--primary-medium);
+  width: 36px;
+  height: 22px;
+  border-radius: 12px;
+  align-items: center;
+  padding: 2.5px;
+}
+
+.dark-theme-toggle-circle {
+  height: 16px;
+  width: 16px;
+  border-radius: 10px;
+  background-color: white;
+  transition: 0.5s ease;
+}
+
+body.dark .dark-theme-toggle-circle {
+  transform: translateX(14px);
+}
+
 /* -------------------------- HAMBURGER & ANIMATION --------------------------*/
 
 .hamburger-mobile {
@@ -277,7 +320,7 @@ main {
   width: calc(100vw - var(--menu-width));
   height: 100vh;
   margin-left: var(--menu-width);
-  background-color: var(--light-grey);
+  background-color: var(--secondary-light);
   padding: 25px 50px;
   overflow: hidden;
   transition: 0.35s ease;
@@ -327,7 +370,7 @@ h2 {
   height: 3px;
   width: 100%;
   border-radius: 2px;
-  background-color: var(--grey);
+  background-color: var(--primary-light);
   transition: 0.5s cubic-bezier(0.5, -1, 0.5, 1.5);
 }
 
@@ -378,7 +421,7 @@ h2 {
 
 .hide-completed-filter:hover,
 .show-all-filter:hover {
-  background-color: var(--light-blue);
+  background-color: var(--secondary-blue-tint);
 }
 
 .task-and-filter-container .hidden {
@@ -395,7 +438,7 @@ h2 {
 }
 
 .new-task-button {
-  color: var(--black);
+  color: var(--primary-strong);
   font-size: 0.9em;
   background-color: transparent;
   border: none;
@@ -418,7 +461,7 @@ h2 {
 }
 
 .new-task-button:hover svg {
-  color: var(--white);
+  color: var(--primary);
   background-color: var(--accent);
 }
 
@@ -437,13 +480,12 @@ h2 {
 
 input[type="text"] {
   border: none;
-  color: var(--black);
   display: block;
   box-sizing: border-box;
   width: 100%;
   padding: 10px;
   border-radius: 5px;
-  background-color: var(--white);
+  background-color: var(--primary-very-strong);
   box-shadow: 0px 0px 3px var(--shadow);
   transition: 0.1s ease;
 }
@@ -499,7 +541,7 @@ input[type="text"]:focus-visible {
 }
 
 .disabled-button {
-  background-color: var(--light-blue);
+  background-color: var(--secondary-blue-tint);
 }
 
 /* -------------------------- NEW TASK MODAL --------------------------*/
@@ -537,11 +579,11 @@ input[type="text"]:focus-visible {
   margin-bottom: 10px;
   font-weight: bold;
   font-size: 1em;
-  color: var(--grey);
+  color: var(--primary-light);
 }
 
 .new-task-modal-form {
-  background-color: white;
+  background-color: var(--secondary-light);
   display: block;
   width: 500px;
   border-radius: 5px;
@@ -592,7 +634,7 @@ input[type="text"]:focus-visible {
 }
 
 .task-container.checked p {
-  color: var(--medium-grey);
+  color: var(--primary-medium);
   text-decoration: line-through;
   transition: 2s left;
 }
@@ -619,7 +661,7 @@ input[type="text"]:focus-visible {
 }
 
 .task-container .edit-task-button:hover ::before {
-  color: blue;
+  color: var(--accent);
   background-color: var(--shadow);
 }
 
@@ -629,12 +671,12 @@ input[type="text"]:focus-visible {
 }
 
 .task-container .delete-task-button:hover ::before {
-  color: red;
+  color: var(--accent-red);
   background-color: var(--shadow);
 }
 
 .task-container:hover {
-  background-color: var(--light-blue);
+  background-color: var(--secondary-blue-tint);
   border-radius: 5px;
 }
 
@@ -666,7 +708,7 @@ input[type="text"]:focus-visible {
 }
 
 .edit-open {
-  background-color: var(--light-blue);
+  background-color: var(--secondary-blue-tint);
   border-radius: 5px;
 }
 
@@ -681,7 +723,7 @@ input[type="text"]:focus-visible {
   padding: 5px 10px;
   border-radius: 2.5px;
   font-size: 0.9em;
-  margin-left: 5px;
+  margin-left: 10px;
 }
 
 @media only screen and (max-width: 700px) {
