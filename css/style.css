@@ -6,6 +6,7 @@
 
   --black: #242a33;
   --grey: #4f5257;
+  --medium-grey: #a3a5aa;
   --light-grey: #f6f7fb;
   --light-blue: #d8def9;
   --white: #ffffff;
@@ -423,7 +424,7 @@ h2 {
 
 .new-task-form {
   display: none;
-  padding: 10px;
+  padding: 5px;
 }
 
 .new-task-form-open > .new-task-form {
@@ -590,11 +591,16 @@ input[type="text"]:focus-visible {
   flex-grow: 1;
 }
 
+.task-container.checked p {
+  color: var(--medium-grey);
+  text-decoration: line-through;
+  transition: 2s left;
+}
+
 .task-container button {
   background-color: transparent;
   border: none;
   cursor: pointer;
-  padding: auto;
 }
 
 .task-container button i {
@@ -640,6 +646,10 @@ input[type="text"]:focus-visible {
 .task-container p:hover {
   text-decoration: underline;
   cursor: pointer;
+}
+
+.task-container.checked p:hover {
+  text-decoration: line-through underline;
 }
 
 .task-edit-container {

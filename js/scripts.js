@@ -74,7 +74,7 @@ function readTasks(input) {
   input.forEach((task) =>
     taskList.insertAdjacentHTML(
       "afterbegin",
-      `<li class="task-container" id="${task.id}">
+      `<li class="task-container ${task.status}" id="${task.id}">
       <div class="task-info-container">
         <input
           type="checkbox"
@@ -290,15 +290,18 @@ function deleteTask(event) {
 // MARK TASK AS DONE
 
 function handleChange(event) {
-  let id = event.parentElement.parentElement.id;
+  let taskId = event.parentElement.parentElement.id;
+  let taskContainer = event.parentElement.parentElement;
   let status;
 
   for (let i = 0; i < tasks.length; i++) {
-    if (tasks[i].id == id) {
+    if (tasks[i].id == taskId) {
       if (tasks[i].status === "checked") {
         status = tasks[i].status = "";
+        taskContainer.classList.remove("checked");
       } else {
         status = tasks[i].status = "checked";
+        taskContainer.classList.add("checked");
       }
     }
   }
