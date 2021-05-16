@@ -16,7 +16,7 @@
     ></script>
     <link rel="preconnect" href="https://fonts.gstatic.com" />
     <link
-      href="https://fonts.googleapis.com/css2?family=Raleway:wght@300;400;500;600;700&display=swap"
+      href="https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@400;700&display=swap"
       rel="stylesheet"
     />
     <link rel="manifest" href="manifest.webmanifest" />
@@ -110,7 +110,11 @@
               </svg>
               Add task
             </button>
-            <form class="new-task-form" onkeypress="toggleSidebarShortcut()">
+            <form
+              class="new-task-form"
+              onkeypress="toggleSidebarShortcut()"
+              onsubmit="addNewTask()"
+            >
               <input
                 class="new-task-input"
                 type="text"

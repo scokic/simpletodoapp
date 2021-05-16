@@ -41,11 +41,12 @@ const newTaskModalClose = document.querySelector(".new-task-modal-close");
 const newTaskModalInput = document.querySelector(".new-task-modal-input");
 const addNewTaskBtnModal = document.querySelector(".add-new-task-modal");
 const cancelNewTaskModal = document.querySelector(".cancel-new-task-modal");
-
-// LOCAL STORAGE INITIALIZATION
-
 let tasks = [];
-getTasks();
+
+// APP INITIALIZATION
+
+readTasksFromLocalStorage();
+readTasks(tasks);
 
 function toggleMobileNav() {
   nav.classList.toggle("open-menu");
@@ -104,8 +105,6 @@ function readTasks(input) {
   hideCompleteBtn.classList.remove("hidden");
   showAllTasksBtn.classList.add("hidden");
 }
-
-readTasks(tasks);
 
 // CREATE NEW TASK
 
@@ -166,7 +165,7 @@ function addNewTask() {
       </form>
     </li>`
     );
-    saveTasks();
+    saveTasksToLocalStorage();
   }
 
   newTaskModal.classList.add("hidden");
@@ -238,10 +237,10 @@ function addNewTaskModal() {
       </form>
     </li>`
     );
-    saveTasks();
+    saveTasksToLocalStorage();
     newTaskModal.classList.add("hidden");
     addNewTaskBtnModal.classList.add("disabled-button");
-    newTaskModalForm.removeEventListener("click", addNewTask);
+    newTaskModalForm.removeEventListener("click", addNewTaskModal);
 
     newTaskModalInput.value = "";
   }
@@ -285,7 +284,7 @@ function deleteTask(event) {
       event.parentElement.remove();
     }
   }
-  saveTasks();
+  saveTasksToLocalStorage();
 }
 
 // MARK TASK AS DONE
@@ -303,7 +302,7 @@ function handleChange(event) {
       }
     }
   }
-  saveTasks();
+  saveTasksToLocalStorage();
 }
 
 // EDIT TASK NAME
@@ -330,7 +329,7 @@ function applyChange(submitEvent) {
       }
     }
   }
-  saveTasks();
+  saveTasksToLocalStorage();
   event.preventDefault();
 }
 
@@ -374,14 +373,12 @@ function hideCompletedTasks() {
 
 // LOCAL STORAGE
 
-console.log(tasks);
-
-function saveTasks() {
+function saveTasksToLocalStorage() {
   var str = JSON.stringify(tasks);
   localStorage.setItem("tasks", str);
 }
 
-function getTasks() {
+function readTasksFromLocalStorage() {
   var str = localStorage.getItem("tasks");
   tasks = JSON.parse(str);
   if (!tasks) {

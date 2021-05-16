@@ -27,8 +27,11 @@
 
 body {
   margin: 0;
-  font-family: "Raleway", sans-serif;
   font-size: 16px;
+}
+
+* {
+  font-family: "Nunito Sans", sans-serif;
 }
 
 ::-webkit-scrollbar {
@@ -531,7 +534,7 @@ input[type="text"]:focus-visible {
 
 .new-task-form-title {
   margin-bottom: 10px;
-  font-weight: 550;
+  font-weight: bold;
   font-size: 1em;
   color: var(--grey);
 }
