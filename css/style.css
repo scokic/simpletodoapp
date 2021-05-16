@@ -617,6 +617,11 @@ input[type="text"]:focus-visible {
   background-color: var(--shadow);
 }
 
+.task-container .edit-task-button,
+.task-container .delete-task-button {
+  opacity: 0;
+}
+
 .task-container .delete-task-button:hover ::before {
   color: red;
   background-color: var(--shadow);
@@ -625,6 +630,11 @@ input[type="text"]:focus-visible {
 .task-container:hover {
   background-color: var(--light-blue);
   border-radius: 5px;
+}
+
+.task-container:hover .edit-task-button,
+.task-container:hover .delete-task-button {
+  opacity: 1;
 }
 
 .task-container p:hover {
