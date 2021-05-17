@@ -33,12 +33,17 @@
       </div>
       <nav>
         <a href="#"><i class="fas fa-inbox"></i>Inbox</a>
+        <a href="#"><i class="fas fa-star"></i>Today</a>
+        <a href="#"><i class="fas fa-book"></i>Complete</a>
+        <br />
+        <a href="#"><i class="fas fa-user"></i>Personal</a>
+        <a href="#"><i class="fas fa-code"></i>Frontend</a>
       </nav>
       <div class="settings">
         <a href="#" onclick="openSettings()">
           <i class="fas fa-cog"></i>Settings</a
         >
-        <div class="settings-modal">
+        <div class="settings-modal modal">
           <ul>
             <li><a href="#">Settings</a></li>
             <li><a href="#">My Account</a></li>
@@ -136,12 +141,27 @@
               </div>
             </form>
           </div>
-          <p class="hide-completed-filter" onclick="hideCompletedTasks()">
-            Hide completed
-          </p>
-          <p class="show-all-filter" onclick="readTasks(tasks)">
-            Show all todos
-          </p>
+          <div class="task-filter">
+            <i class="task-filter-toggle fas fa-filter"></i>
+            <div class="task-filter-modal modal">
+              <ul>
+                <li>
+                  <a
+                    class="hide-completed-filter"
+                    onclick="hideCompletedTasks()"
+                  >
+                    Hide completed
+                  </a>
+                </li>
+
+                <li>
+                  <a class="show-all-filter" onclick="readTasks(tasks)">
+                    Show all todos
+                  </a>
+                </li>
+              </ul>
+            </div>
+          </div>
         </div>
         <div class="main-container">
           <div class="tasks-container"></div>

@@ -6,6 +6,7 @@ body {
   --accent: #4977e7;
   --accent-light: hsl(223, 76%, 80%);
   --secondary: red;
+  --border: #cccccc;
 
   --text: #333333;
   --text-accent: #4977e7;
@@ -29,6 +30,7 @@ body.dark {
   --accent: #4977e7;
   --accent-light: hsl(0, 0%, 80%);
   --secondary: red;
+  --border: #333333;
 
   --text: #dddddd;
   --text-accent: #4977e7;
@@ -49,7 +51,7 @@ body.dark {
 }
 
 *::placeholder {
-  font-size: 0.9rem;
+  font-size: 1rem;
 }
 
 body {
@@ -114,6 +116,10 @@ header a {
   text-decoration: none;
 }
 
+header i {
+  margin-right: 10px;
+}
+
 .logo-container {
   font-weight: bold;
   font-size: 1.2em;
@@ -126,27 +132,35 @@ nav {
   flex-grow: 1;
 }
 
-i {
-  margin-right: 10px;
+nav a {
+  display: grid;
+  grid-template-columns: 35px 1fr;
+}
+
+nav i {
+  margin: auto;
 }
 
 header a:hover {
   background-color: var(--background-hover);
 }
 
-.settings-modal {
+.modal {
   flex-direction: column;
   padding: 10px;
-  background-color: var(--background-2);
+  background-color: var(--background);
   box-shadow: var(--background-shadow);
   border-radius: 5px;
-  width: 250px;
-  position: fixed;
-  bottom: 55px;
-  left: 10px;
-  display: none;
   transition: 0.2s ease;
   z-index: 99;
+}
+
+.settings-modal {
+  position: fixed;
+  display: none;
+  bottom: 55px;
+  left: 10px;
+  width: 250px;
 }
 
 .nav-logo {
@@ -164,11 +178,11 @@ header a:hover {
   }
 }
 
-.settings-modal ul {
+.modal ul {
   padding: 0;
 }
 
-.settings-modal li a {
+.modal li a {
   padding-left: 33px;
   padding-right: 33px;
 }
@@ -185,7 +199,7 @@ header a:hover {
   transition: 0.2s ease;
 }
 
-.settings.open .settings-modal {
+.settings.open .modal {
   display: flex;
 }
 
@@ -344,6 +358,10 @@ h2 {
   font-size: 1.5em;
 }
 
+h2 i {
+  margin-right: 15px;
+}
+
 .home-container {
   max-width: 650px;
   display: flex;
@@ -428,7 +446,7 @@ h2 {
   padding: 10px;
   border-radius: 5px;
   cursor: pointer;
-  font-size: 14px;
+  font-size: 1em;
 }
 
 .hide-completed-filter:hover,
@@ -451,7 +469,7 @@ h2 {
 
 .new-task-button {
   color: var(--text);
-  font-size: 0.9em;
+  font-size: 1em;
   background-color: transparent;
   border: none;
   align-items: center;
@@ -501,6 +519,7 @@ input[type="text"] {
   color: var(--text);
   transition: 0.1s ease;
   border: 1px solid #ddd;
+  font-size: 1rem;
 }
 
 input[type="text"]:focus-visible {
@@ -520,7 +539,7 @@ input[type="text"]:focus-visible {
   border: none;
   padding: 5px 10px;
   border-radius: 2.5px;
-  font-size: 0.9em;
+  font-size: 1em;
   transition: 0.1s ease;
 }
 
@@ -530,7 +549,7 @@ input[type="text"]:focus-visible {
   background-color: transparent;
   border: none;
   padding: 5px 10px;
-  font-size: 0.9em;
+  font-size: 1em;
   border-radius: 2.5px;
   color: var(--text);
 }
@@ -744,7 +763,7 @@ input[type="text"]:focus-visible {
   border: none;
   padding: 5px 10px;
   border-radius: 2.5px;
-  font-size: 0.9em;
+  font-size: 1em;
   margin-left: 10px;
 }
 
@@ -755,4 +774,38 @@ input[type="text"]:focus-visible {
     padding-top: 50px;
     height: 100vh;
   }
+}
+
+/* -------------------------- TASK FILTER --------------------------*/
+
+.task-filter {
+  position: relative;
+}
+
+.task-filter-toggle {
+  padding: 10px;
+  margin-top: 10px;
+  cursor: pointer;
+}
+
+.task-filter-toggle:hover {
+  background-color: var(--background-hover);
+  color: var(--accent);
+}
+
+.task-filter-modal {
+  position: absolute;
+  right: 0;
+  width: 200px;
+  background-color: var(--background-2);
+  display: none;
+}
+
+.task-filter-modal a {
+  display: block;
+  margin: 0;
+}
+
+.task-filter-modal.open {
+  display: block;
 }
