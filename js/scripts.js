@@ -91,7 +91,7 @@ function readTasks(input) {
       </div>
       <form class="task-edit-container">
         <input class="edit-task-input" type="text" placeholder="Enter todo name" onkeydown="changeCancelOnKeydown(this)" onkeypress="toggleSidebarShortcut()"/>
-        <button class="apply-button" onclick="applyChange(this)">
+        <button class="apply-button disabled-button" onclick="applyChange(this)">
         Apply
         </button>
         <button class="cancel-button" onclick="cancelChange(this)">
@@ -269,19 +269,58 @@ function disableModalButton() {
   }
 }
 
+taskList.addEventListener("input", function (e) {
+  const taskInfo = e.target.parentElement;
+  const button = taskInfo.children[1];
+  if (e.target.value !== "") {
+    button.classList.remove("disabled-button");
+  } else {
+    button.classList.add("disabled-button");
+  }
+});
+
+// CLOSE TASK EDIT FORM WHEN ANOTHER TASK OPENS
+
+taskList.addEventListener("click", function (e) {
+  const editTaskButton = e.target.parentElement;
+  const taskName = e.target;
+
+  if (editTaskButton.className == "edit-task-button") {
+    const taskWrapper = e.target.parentElement.parentElement.parentElement;
+
+    if (!taskWrapper.classList.contains("edit-open")) {
+    } else {
+      taskList.childNodes.forEach((task) => {
+        task.classList.remove("edit-open");
+      });
+      taskWrapper.classList.add("edit-open");
+    }
+  } else if (taskName.className == "task-name") {
+    const taskWrapper = e.target.parentElement.parentElement;
+
+    if (!taskWrapper.classList.contains("edit-open")) {
+    } else {
+      taskList.childNodes.forEach((task) => {
+        task.classList.remove("edit-open");
+      });
+      taskWrapper.classList.add("edit-open");
+    }
+  }
+});
+
 cancelNewTaskModal.addEventListener("click", hideNewTaskModal);
 
 // DELETE A TASK
 
 function deleteTask(event) {
   let id = event.parentElement.parentElement.id;
-
   event.parentElement.parentElement.classList.remove("edit-open");
 
   for (let i = 0; i < tasks.length; i++) {
     if (tasks[i].id == id) {
       tasks.splice(i, 1);
-      event.parentElement.remove();
+      const taskWrapper = event.parentElement.parentElement;
+      taskWrapper.remove();
     }
   }
   saveTasksToLocalStorage();
@@ -317,18 +356,20 @@ function editTask(event) {
 
 function applyChange(submitEvent) {
   let id = submitEvent.parentElement.parentElement.id;
-  let input = submitEvent.parentElement.children[0].value;
+  let input = submitEvent.parentElement.children[0];
+  let button = submitEvent.parentElement.children[1];
 
-  if (input !== "") {
+  if (input.value !== "") {
     for (let i = 0; i < tasks.length; i++) {
       if (tasks[i].id == id) {
-        tasks[i].name = input;
+        tasks[i].name = input.value;
         submitEvent.parentElement.parentElement.children[0].children[1].textContent =
-          input;
+          input.value;
 
         submitEvent.parentElement.children[0].value = "";
         let task =
           submitEvent.parentElement.parentElement.classList.remove("edit-open");
+        button.classList.add("disabled-button");
       }
     }
   }
