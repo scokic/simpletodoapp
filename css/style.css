@@ -150,6 +150,11 @@ header a:hover {
   z-index: 99;
 }
 
+.nav-logo {
+  max-height: 1.5rem;
+  margin-right: 10px;
+}
+
 @media only screen and (max-width: 700px) {
   .settings-modal {
     bottom: 155;
@@ -207,25 +212,29 @@ header a:hover {
     left: 0px;
     width: 150px;
     border-radius: 5px;
-    padding: 10px;
-    background-color: var(--primary-light);
-    display: none;
+    background-color: var(--primary);
+    height: 0;
+    overflow: hidden;
+    transition: 0.2s ease;
+    transition-delay: 0.5s;
   }
 
   .hamburger-desktop:hover .hamburger-desktop-info {
-    display: block;
+    height: 4rem;
   }
 
   .hamburger-desktop-info p {
-    color: var(--primary);
-    font-size: 14px;
+    color: var(--primary-light);
+    font-size: 1rem;
+    line-height: 1.2rem;
+    margin: 0.8rem;
     z-index: 10;
   }
 
   .hamburger-desktop-info::after {
     content: "";
     display: block;
-    background-color: var(--primary-light);
+    background-color: var(--primary);
     height: 15px;
     width: 15px;
     top: -5px;
@@ -487,6 +496,7 @@ input[type="text"] {
   border-radius: 5px;
   background-color: var(--primary-very-strong);
   box-shadow: 0px 0px 3px var(--shadow);
+  color: var(--primary-light);
   transition: 0.1s ease;
 }
 
