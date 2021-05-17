@@ -1,40 +1,51 @@
 body {
+  --background: #ffffff;
+  --background-2: #f5f6f8;
+  --background-hover: rgba(75, 111, 222, 0.12);
+  --background-active: rgba(75, 111, 222, 0.12);
   --accent: #4977e7;
-  --accent-red: #ff225b;
+  --accent-light: hsl(223, 76%, 80%);
+  --secondary: red;
 
-  --primary: #ffffff;
-  --primary-very-strong: #fcfdff;
-  --primary-strong: #242a33;
-  --primary-medium: #a3a5aa;
-  --primary-light: #4f5257;
-  --secondary-light: #f6f7fb;
-  --secondary-blue-tint: #d8def9;
+  --text: #333333;
+  --text-accent: #4977e7;
+  --text-light: #666666;
+  --text-hover: #000000;
+  --text-active: #265ce4;
 
-  --shadow: #242a3325;
-  --shadow-dark: #242a3375;
+  --background-shadow-color: #4f515355;
+  --surface-shadow-color: #44464b50;
+  --background-shadow: 0px 0px 5px var(--background-shadow-color);
+  --surface-shadow: 0px 0px 10px var(--surface-shadow-color);
 
   --menu-width: 250px;
 }
 
 body.dark {
-  --accent: #1d5ce2;
-  --accent-red: #ff225b;
+  --background: #252728;
+  --background-2: #1c1e20;
+  --background-hover: rgba(75, 111, 222, 0.12);
+  --background-active: rgba(75, 111, 222, 0.12);
+  --accent: #4977e7;
+  --accent-light: hsl(0, 0%, 80%);
+  --secondary: red;
 
-  --primary: #061119;
-  --primary-very-strong: #0a1c29;
-  --primary-strong: #fcfdff;
-  --primary-medium: #6d6f72;
-  --primary-light: #fcfdff;
-  --secondary-light: #0c1b28;
-  --secondary-blue-tint: #12283b;
+  --text: #dddddd;
+  --text-accent: #4977e7;
+  --text-light: #666666;
+  --text-hover: #bbbbbb;
+  --text-active: #265ce4;
 
-  --shadow: #00000050;
-  --shadow-dark: #00000099;
+  --background-shadow-color: #00000050;
+  --surface-shadow-color: #00000050;
+  --background-shadow: 0px 0px 15px var(--background-shadow-color);
+  --surface-shadow: 0px 0px 15px var(--surface-shadow-color);
 }
 
 * {
   margin: 0;
   box-sizing: border-box;
+  font-family: "Nunito Sans", sans-serif;
 }
 
 *::placeholder {
@@ -46,8 +57,16 @@ body {
   font-size: 16px;
 }
 
-* {
-  font-family: "Nunito Sans", sans-serif;
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p,
+a,
+i {
+  color: var(--text);
 }
 
 ::-webkit-scrollbar {
@@ -64,24 +83,8 @@ body {
   background: #555;
 }
 
-p,
-a,
-i,
-button {
-  color: var(--primary-light);
-}
-
 a {
   cursor: pointer;
-}
-
-h1,
-h2,
-h3,
-h4,
-h5,
-h6 {
-  color: var(--primary-strong);
 }
 
 li {
@@ -96,8 +99,8 @@ header {
   height: 100vh;
   width: var(--menu-width);
   position: fixed;
-  background-color: var(--primary);
-  box-shadow: 0px 0px 25px var(--shadow);
+  background-color: var(--background-2);
+  box-shadow: var(--surface-shadow);
   padding: 10px;
   list-style-type: none;
   transition: 0.35s ease;
@@ -119,10 +122,6 @@ header a {
   display: flex;
 }
 
-.logo-container > * {
-  color: var(--accent);
-}
-
 nav {
   flex-grow: 1;
 }
@@ -132,14 +131,14 @@ i {
 }
 
 header a:hover {
-  background-color: var(--secondary-blue-tint);
+  background-color: var(--background-hover);
 }
 
 .settings-modal {
   flex-direction: column;
   padding: 10px;
-  background-color: var(--primary);
-  box-shadow: 0px 0px 25px var(--shadow);
+  background-color: var(--background-2);
+  box-shadow: var(--background-shadow);
   border-radius: 5px;
   width: 250px;
   position: fixed;
@@ -182,7 +181,7 @@ header a:hover {
   top: 0;
   left: 0;
   display: none;
-  background-color: var(--shadow);
+  background-color: var(--on-background);
   transition: 0.2s ease;
 }
 
@@ -212,29 +211,17 @@ header a:hover {
     left: 0px;
     width: 150px;
     border-radius: 5px;
-    background-color: var(--primary);
+    background-color: var(--background-2);
+    box-shadow: var(--surface-shadow);
     height: 0;
     overflow: hidden;
     transition: 0.2s ease;
-    transition-delay: 0.5s;
-  }
-
-  .hamburger-desktop:hover .hamburger-desktop-info {
-    height: 4rem;
-  }
-
-  .hamburger-desktop-info p {
-    color: var(--primary-light);
-    font-size: 1rem;
-    line-height: 1.2rem;
-    margin: 0.8rem;
-    z-index: 10;
   }
 
   .hamburger-desktop-info::after {
     content: "";
     display: block;
-    background-color: var(--primary);
+    background-color: var(--background-2);
     height: 15px;
     width: 15px;
     top: -5px;
@@ -242,6 +229,18 @@ header a:hover {
     position: absolute;
     z-index: 9;
     transform: rotate(45deg);
+    transition: 0.2s ease;
+  }
+
+  .hamburger-desktop:hover .hamburger-desktop-info {
+    height: 4rem;
+  }
+
+  .hamburger-desktop-info p {
+    font-size: 1rem;
+    line-height: 1.2rem;
+    margin: 0.8rem;
+    z-index: 10;
   }
 
   .nav-hidden-desktop .hamburger-desktop {
@@ -267,7 +266,7 @@ header a:hover {
     position: fixed;
     left: -100%;
     transition: 0.4s ease;
-    box-shadow: 0px 0px 25px rgb(0 0 0 / 50%);
+    box-shadow: var(--surface-shadow);
     padding-top: 50px;
     padding-bottom: 150px;
   }
@@ -285,7 +284,7 @@ header a:hover {
 }
 
 .dark-theme-toggle {
-  background-color: var(--primary-medium);
+  background-color: var(--text);
   width: 36px;
   height: 22px;
   border-radius: 12px;
@@ -297,7 +296,7 @@ header a:hover {
   height: 16px;
   width: 16px;
   border-radius: 10px;
-  background-color: white;
+  background-color: var(--background);
   transition: 0.5s ease;
 }
 
@@ -329,10 +328,14 @@ main {
   width: calc(100vw - var(--menu-width));
   height: 100vh;
   margin-left: var(--menu-width);
-  background-color: var(--secondary-light);
+  background-color: var(--background);
   padding: 25px 50px;
   overflow: hidden;
   transition: 0.35s ease;
+}
+
+.header-container {
+  margin: 10px;
 }
 
 h2 {
@@ -379,7 +382,7 @@ h2 {
   height: 3px;
   width: 100%;
   border-radius: 2px;
-  background-color: var(--primary-light);
+  background-color: var(--text);
   transition: 0.5s cubic-bezier(0.5, -1, 0.5, 1.5);
 }
 
@@ -413,7 +416,7 @@ h2 {
 
 .task-and-filter-container {
   display: grid;
-  margin-bottom: 10px;
+  margin: 10px;
   grid-template-columns: 1fr auto;
 }
 
@@ -430,7 +433,7 @@ h2 {
 
 .hide-completed-filter:hover,
 .show-all-filter:hover {
-  background-color: var(--secondary-blue-tint);
+  background-color: var(--background-hover);
 }
 
 .task-and-filter-container .hidden {
@@ -447,7 +450,7 @@ h2 {
 }
 
 .new-task-button {
-  color: var(--primary-strong);
+  color: var(--text);
   font-size: 0.9em;
   background-color: transparent;
   border: none;
@@ -464,13 +467,13 @@ h2 {
 }
 
 .new-task-button:hover {
-  color: var(--accent);
+  color: var(--text-accent);
   cursor: pointer;
   border-radius: 5px;
 }
 
 .new-task-button:hover svg {
-  color: var(--primary);
+  color: white;
   background-color: var(--accent);
 }
 
@@ -494,15 +497,15 @@ input[type="text"] {
   width: 100%;
   padding: 10px;
   border-radius: 5px;
-  background-color: var(--primary-very-strong);
-  box-shadow: 0px 0px 3px var(--shadow);
-  color: var(--primary-light);
+  background-color: var(--background);
+  color: var(--text);
   transition: 0.1s ease;
+  border: 1px solid #ddd;
 }
 
 input[type="text"]:focus-visible {
   outline: none;
-  box-shadow: 0px 0px 3px var(--shadow-dark);
+  border: 1px solid var(--accent);
 }
 
 .new-task-buttons-container {
@@ -518,6 +521,7 @@ input[type="text"]:focus-visible {
   padding: 5px 10px;
   border-radius: 2.5px;
   font-size: 0.9em;
+  transition: 0.1s ease;
 }
 
 .cancel-new-task,
@@ -528,6 +532,7 @@ input[type="text"]:focus-visible {
   padding: 5px 10px;
   font-size: 0.9em;
   border-radius: 2.5px;
+  color: var(--text);
 }
 
 .add-new-task:hover,
@@ -551,7 +556,7 @@ input[type="text"]:focus-visible {
 }
 
 .disabled-button {
-  background-color: var(--secondary-blue-tint);
+  background-color: var(--accent-light) !important;
 }
 
 /* -------------------------- NEW TASK MODAL --------------------------*/
@@ -583,22 +588,19 @@ input[type="text"]:focus-visible {
   transform: translateY(-50%) translateX(-50%);
   left: 50%;
   z-index: 95;
+  background-color: var(--background);
+  box-shadow: var(--background-shadow);
+  display: block;
+  width: 500px;
+  border-radius: 5px;
+  padding: 15px;
+  z-index: 100;
 }
 
 .new-task-form-title {
   margin-bottom: 10px;
   font-weight: bold;
   font-size: 1em;
-  color: var(--primary-light);
-}
-
-.new-task-modal-form {
-  background-color: var(--secondary-light);
-  display: block;
-  width: 500px;
-  border-radius: 5px;
-  padding: 15px;
-  z-index: 100;
 }
 
 .new-task-modal-close {
@@ -607,7 +609,7 @@ input[type="text"]:focus-visible {
   width: 100vw;
   top: 0;
   left: 0;
-  background-color: var(--shadow-dark);
+  background-color: var(--background-shadow-color);
   display: block;
   z-index: 90;
 }
@@ -638,13 +640,17 @@ input[type="text"]:focus-visible {
   border-radius: 5px;
 }
 
+.task-container {
+  margin: 5px 10px;
+}
+
 .task-container p {
   margin-left: 10px;
   flex-grow: 1;
 }
 
 .task-container.checked p {
-  color: var(--primary-medium);
+  color: var(--text-light);
   text-decoration: line-through;
   transition: 2s left;
 }
@@ -671,8 +677,8 @@ input[type="text"]:focus-visible {
 }
 
 .task-container .edit-task-button:hover ::before {
+  background-color: var(--background);
   color: var(--accent);
-  background-color: var(--shadow);
 }
 
 .task-container .edit-task-button,
@@ -680,13 +686,18 @@ input[type="text"]:focus-visible {
   opacity: 0;
 }
 
+.edit-open .edit-task-button,
+.edit-open .delete-task-button {
+  opacity: 1;
+}
+
 .task-container .delete-task-button:hover ::before {
-  color: var(--accent-red);
-  background-color: var(--shadow);
+  color: var(--secondary);
+  background-color: var(--background);
 }
 
 .task-container:hover {
-  background-color: var(--secondary-blue-tint);
+  background-color: var(--background-hover);
   border-radius: 5px;
 }
 
@@ -718,7 +729,8 @@ input[type="text"]:focus-visible {
 }
 
 .edit-open {
-  background-color: var(--secondary-blue-tint);
+  background-color: var(--background-hover);
+  box-shadow: var(--background-shadow);
   border-radius: 5px;
 }
 
