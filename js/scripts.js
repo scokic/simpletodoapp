@@ -429,3 +429,12 @@ function readTasksFromLocalStorage() {
     tasks = [];
   }
 }
+
+// TASK FILTER TOGGLE
+
+const taskFilterToggle = document.querySelector(".task-filter-toggle");
+const taskFilterModal = document.querySelector(".task-filter-modal");
+
+taskFilterToggle.addEventListener("click", () => {
+  taskFilterModal.classList.toggle("open");
+});
