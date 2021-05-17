@@ -7,7 +7,7 @@
       name="viewport"
       content="width=device-width, initial-scale=1.0, maximum-scale=1"
     />
-    <title>Simple Task</title>
+    <title>Simple Todo App</title>
     <link rel="stylesheet" href="css/style.css" />
     <script defer src="js/scripts.js"></script>
     <script
@@ -21,14 +21,15 @@
       rel="stylesheet"
     />
     <link rel="manifest" href="manifest.webmanifest" />
-    <link rel="shortcut icon" type="image/png" href="/images/icons-192.png" />
+    <link rel="shortcut icon" type="image/png" href="/images/icons-50.png" />
     <link rel="apple-touch-icon" href="images/icons-192.png" />
   </head>
   <body onkeypress="toggleSidebarShortcut()">
     <header id="nav-bar">
       <div class="logo-container">
-        <i class="fas fa-check"></i>
-        <p class="logo">Simple Task</p>
+        <img src="./images/icons-50.png" alt="logo" class="nav-logo" />
+        <!-- <i class="fas fa-check"></i> -->
+        <p class="logo">Simple Todo App</p>
       </div>
       <nav>
         <a href="#"><i class="fas fa-inbox"></i>Inbox</a>
@@ -83,16 +84,16 @@
           onkeypress="toggleSidebarShortcut()"
           onsubmit="addNewTaskModal()"
         >
-          <h4 class="new-task-form-title">Create new task</h4>
+          <h4 class="new-task-form-title">Create new todo</h4>
           <input
             class="new-task-modal-input"
             type="text"
-            placeholder="Enter task name"
+            placeholder="Enter todo name"
             oninput="disableModalButton()"
             onkeydown="closeNewTaskModal()"
           />
           <div class="new-task-buttons-container">
-            <button class="add-new-task-modal disabled-button">Add task</button>
+            <button class="add-new-task-modal disabled-button">Add todo</button>
             <button class="cancel-new-task-modal">Cancel</button>
           </div>
         </form>
@@ -103,7 +104,7 @@
     <main>
       <div class="home-container">
         <div class="header-container">
-          <h2><i class="fas fa-inbox"></i>All tasks</h2>
+          <h2><i class="fas fa-inbox"></i>All todos</h2>
         </div>
 
         <div class="task-and-filter-container">
@@ -116,7 +117,7 @@
                   fill-rule="evenodd"
                 ></path>
               </svg>
-              Add task
+              Add todo
             </button>
             <form
               class="new-task-form"
@@ -126,11 +127,11 @@
               <input
                 class="new-task-input"
                 type="text"
-                placeholder="Enter task name"
+                placeholder="Enter todo name"
                 oninput="disableButton()"
               />
               <div class="new-task-buttons-container">
-                <button class="add-new-task disabled-button">Add task</button>
+                <button class="add-new-task disabled-button">Add todo</button>
                 <button class="cancel-new-task">Cancel</button>
               </div>
             </form>
@@ -139,7 +140,7 @@
             Hide completed
           </p>
           <p class="show-all-filter" onclick="readTasks(tasks)">
-            Show all tasks
+            Show all todos
           </p>
         </div>
         <div class="main-container">

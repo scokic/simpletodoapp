@@ -90,7 +90,7 @@ function readTasks(input) {
         </button>
       </div>
       <form class="task-edit-container">
-        <input class="edit-task-input" type="text" placeholder="Enter task name" onkeydown="changeCancelOnKeydown(this)" onkeypress="toggleSidebarShortcut()"/>
+        <input class="edit-task-input" type="text" placeholder="Enter todo name" onkeydown="changeCancelOnKeydown(this)" onkeypress="toggleSidebarShortcut()"/>
         <button class="apply-button" onclick="applyChange(this)">
         Apply
         </button>
@@ -155,7 +155,7 @@ function addNewTask() {
         </button>
       </div>
       <form class="task-edit-container">
-        <input class="edit-task-input" type="text" placeholder="Enter task name" onkeydown="changeCancelOnKeydown(this)" onkeypress="toggleSidebarShortcut()"/>
+        <input class="edit-task-input" type="text" placeholder="Enter todo name" onkeydown="changeCancelOnKeydown(this)" onkeypress="toggleSidebarShortcut()"/>
         <button class="apply-button" onclick="applyChange(this)">
         Apply
         </button>
@@ -227,7 +227,7 @@ function addNewTaskModal() {
         </button>
       </div>
       <form class="task-edit-container">
-        <input class="edit-task-input" type="text" placeholder="Enter task name" onkeydown="changeCancelOnKeydown(this)" onkeypress="toggleSidebarShortcut()"/>
+        <input class="edit-task-input" type="text" placeholder="Enter todo name" onkeydown="changeCancelOnKeydown(this)" onkeypress="toggleSidebarShortcut()"/>
         <button class="apply-button" onclick="applyChange(this)">
         Apply
         </button>
