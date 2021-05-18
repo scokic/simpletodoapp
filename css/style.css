@@ -373,7 +373,7 @@ body.dark .dark-theme-toggle-circle {
   .top-nav {
     padding-top: 50px;
     height: 100px;
-    z-index: 9999;
+    z-index: 888;
   }
 
   main {
@@ -382,6 +382,7 @@ body.dark .dark-theme-toggle-circle {
 
   #nav-bar {
     padding-top: 100px;
+    z-index: 999;
   }
 }
 
