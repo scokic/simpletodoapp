@@ -503,7 +503,7 @@ h2 {
   -moz-transform: translateX(-15px);
   -ms-transform: translateX(-15px);
   -o-transform: translateX(-15px);
-  background-color: transparent;
+  background-color: transparent !important;
   box-shadow: none;
 }
 
@@ -670,6 +670,33 @@ input[type="text"]:focus-visible {
 .disabled-button {
   background-color: var(--accent-light) !important;
   cursor: not-allowed !important;
+}
+
+/* -------------------------- CUSTOM CHECKBOX --------------------------*/
+
+.checkbox {
+  height: 16px;
+  width: 16px;
+  border-radius: 5px;
+  border: 1px solid var(--accent);
+  display: grid;
+  place-items: center;
+  transition: 0.2s ease;
+}
+
+.checked .checkbox {
+  background-color: var(--accent);
+  transition: 0.2s ease;
+}
+.checkbox i {
+  color: white;
+  font-size: 0;
+  transition: 0.2s ease;
+  pointer-events: none;
+}
+
+.checked .checkbox i {
+  font-size: 0.6rem;
 }
 
 /* -------------------------- NEW TASK MODAL --------------------------*/
