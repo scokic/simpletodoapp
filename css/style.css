@@ -824,11 +824,6 @@ input[type="text"]:focus-visible {
   padding: 7px;
 }
 
-.task-container .edit-task-button:hover ::before {
-  background-color: var(--background);
-  color: var(--accent);
-}
-
 .task-container .edit-task-button,
 .task-container .delete-task-button {
   opacity: 0;
@@ -839,21 +834,26 @@ input[type="text"]:focus-visible {
   opacity: 1;
 }
 
-.task-container .delete-task-button:hover ::before {
-  color: var(--secondary);
-  background-color: var(--background);
-}
-
 @media only screen and (min-width: 701px) {
+  .task-container .edit-task-button:hover ::before {
+    background-color: var(--background);
+    color: var(--accent);
+  }
+
   .task-container:hover {
     background-color: var(--background-hover);
     border-radius: 5px;
   }
-}
 
-.task-container:hover .edit-task-button,
-.task-container:hover .delete-task-button {
-  opacity: 1;
+  .task-container .delete-task-button:hover ::before {
+    color: var(--secondary);
+    background-color: var(--background);
+  }
+
+  .task-container:hover .edit-task-button,
+  .task-container:hover .delete-task-button {
+    opacity: 1;
+  }
 }
 
 .task-container p:hover {
