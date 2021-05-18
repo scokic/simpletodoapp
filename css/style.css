@@ -354,6 +354,10 @@ body.dark .dark-theme-toggle-circle {
     position: fixed;
   }
 
+  .top-nav h2 {
+    color: white;
+  }
+
   .home-container h2 {
     display: none;
   }
@@ -387,6 +391,15 @@ body.dark .dark-theme-toggle-circle {
   #nav-bar {
     padding-top: 100px;
     z-index: 999;
+  }
+
+  .android .top-nav {
+    padding-top: 10px !important;
+    height: 50px !important;
+  }
+
+  .android #nav-bar {
+    padding-top: 10px !important;
   }
 }
 

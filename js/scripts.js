@@ -16,7 +16,17 @@ async function registerSW() {
   }
 }
 
+function getMobileOperatingSystem() {
+  var userAgent = navigator.userAgent || navigator.vendor || window.opera;
+
+  if (/android/i.test(userAgent)) {
+    body.classList.add("android");
+  }
+}
+
 // MENU OPEN
+
+const body = document.getElementsByTagName("BODY")[0];
 
 const hamburger = document.querySelector(".hamburger");
 const nav = document.getElementById("nav-bar");
@@ -41,12 +51,14 @@ const newTaskModalClose = document.querySelector(".new-task-modal-close");
 const newTaskModalInput = document.querySelector(".new-task-modal-input");
 const addNewTaskBtnModal = document.querySelector(".add-new-task-modal");
 const cancelNewTaskModal = document.querySelector(".cancel-new-task-modal");
+
 let tasks = [];
 
 // APP INITIALIZATION
 
 readTasksFromLocalStorage();
 readTasks(tasks);
+getMobileOperatingSystem();
 
 function toggleMobileNav() {
   nav.classList.toggle("open-menu");
