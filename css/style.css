@@ -354,6 +354,10 @@ body.dark .dark-theme-toggle-circle {
     position: fixed;
   }
 
+  .home-container h2 {
+    display: none;
+  }
+
   .open-menu {
     left: 0;
     z-index: 99;
