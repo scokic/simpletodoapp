@@ -363,7 +363,7 @@ body.dark .dark-theme-toggle-circle {
 @media screen and (display-mode: standalone) {
   .top-nav {
     padding-top: 40px;
-    height: 80px;
+    height: 90px;
   }
 
   main {
@@ -371,7 +371,7 @@ body.dark .dark-theme-toggle-circle {
   }
 
   #nav-bar {
-    padding-top: 40px;
+    padding-top: 50px;
   }
 }
 
