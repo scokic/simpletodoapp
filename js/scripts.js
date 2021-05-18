@@ -344,47 +344,32 @@ function deleteTask(event) {
 
 // MARK TASK AS DONE
 
-// function handleChange(event) {
-//   let taskId = event.parentElement.parentElement.id;
-//   let taskContainer = event.parentElement.parentElement;
-//   let status;
+taskList.addEventListener(
+  "click",
+  function (e) {
+    const checkbox = e.target;
+    const taskCont = checkbox.parentElement.parentElement;
+    const taskId = taskCont.id;
+    let status;
 
-//   for (let i = 0; i < tasks.length; i++) {
-//     if (tasks[i].id == taskId) {
-//       if (tasks[i].status === "checked") {
-//         status = tasks[i].status = "";
-//         taskContainer.classList.remove("checked");
-//       } else {
-//         status = tasks[i].status = "checked";
-//         taskContainer.classList.add("checked");
-//       }
-//     }
-//   }
-//   saveTasksToLocalStorage();
-// }
-
-taskList.addEventListener("click", function (e) {
-  const checkbox = e.target;
-  const taskCont = checkbox.parentElement.parentElement;
-  const taskId = taskCont.id;
-  let status;
-
-  if (checkbox.classList.contains("checkbox")) {
-    for (let i = 0; i < tasks.length; i++) {
-      if (tasks[i].id == taskId) {
-        if (tasks[i].status === "checked") {
-          status = tasks[i].status = "";
-          taskCont.classList.remove("checked");
-        } else {
-          status = tasks[i].status = "checked";
-          taskCont.classList.add("checked");
+    if (checkbox.classList.contains("checkbox")) {
+      for (let i = 0; i < tasks.length; i++) {
+        if (tasks[i].id == taskId) {
+          if (tasks[i].status === "checked") {
+            status = tasks[i].status = "";
+            taskCont.classList.remove("checked");
+          } else {
+            status = tasks[i].status = "checked";
+            taskCont.classList.add("checked");
+          }
         }
       }
     }
-  }
 
-  saveTasksToLocalStorage();
-});
+    saveTasksToLocalStorage();
+  },
+  true
+);
 
 // EDIT TASK NAME
 
