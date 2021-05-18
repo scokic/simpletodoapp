@@ -94,11 +94,7 @@ function readTasks(input) {
       "afterbegin",
       `<li class="task-container ${task.status}" id="${task.id}">
       <div class="task-info-container">
-      <input
-      type="checkbox"
-      ${task.status}
-      onchange="handleChange(this)" class="task-checkbox"
-      />
+      <div class="checkbox task-checkbox ${task.status}" onchange="handleChange(this)"><i class="fas fa-check"></i></div>
       <p class="task-name" onclick="editTask(this)">${task.name}</p>
       <button class="edit-task-button" onclick="editTask(this)">
       <i class="fas fa-pen"></i>
@@ -163,11 +159,7 @@ function addNewTask() {
       "afterbegin",
       `<li class="task-container" id="${newTask.id}">
       <div class="task-info-container">
-        <input
-          type="checkbox"
-          ${newTask.status}
-          onchange="handleChange(this)" class="task-checkbox"
-        />
+      <div class="checkbox task-checkbox ${newTask.status}" onchange="handleChange(this)"><i class="fas fa-check"></i></div>
         <p class="task-name" onclick="editTask(this)">${newTask.name}</p>
         <button class="edit-task-button" onclick="editTask(this)">
           <i class="fas fa-pen"></i>
@@ -237,11 +229,7 @@ function addNewTaskModal() {
       "afterbegin",
       `<li class="task-container" id="${newTask.id}">
       <div class="task-info-container">
-        <input
-          type="checkbox"
-          ${newTask.status}
-          onchange="handleChange(this)" class="task-checkbox"
-        />
+      <div class="checkbox task-checkbox ${newTask.status}" onchange="handleChange(this)"><i class="fas fa-check"></i></div>
         <p class="task-name" onclick="editTask(this)">${newTask.name}</p>
         <button class="edit-task-button" onclick="editTask(this)">
           <i class="fas fa-pen"></i>
@@ -356,24 +344,47 @@ function deleteTask(event) {
 
 // MARK TASK AS DONE
 
-function handleChange(event) {
-  let taskId = event.parentElement.parentElement.id;
-  let taskContainer = event.parentElement.parentElement;
+// function handleChange(event) {
+//   let taskId = event.parentElement.parentElement.id;
+//   let taskContainer = event.parentElement.parentElement;
+//   let status;
+
+//   for (let i = 0; i < tasks.length; i++) {
+//     if (tasks[i].id == taskId) {
+//       if (tasks[i].status === "checked") {
+//         status = tasks[i].status = "";
+//         taskContainer.classList.remove("checked");
+//       } else {
+//         status = tasks[i].status = "checked";
+//         taskContainer.classList.add("checked");
+//       }
+//     }
+//   }
+//   saveTasksToLocalStorage();
+// }
+
+taskList.addEventListener("click", function (e) {
+  const checkbox = e.target;
+  const taskCont = checkbox.parentElement.parentElement;
+  const taskId = taskCont.id;
   let status;
 
-  for (let i = 0; i < tasks.length; i++) {
-    if (tasks[i].id == taskId) {
-      if (tasks[i].status === "checked") {
-        status = tasks[i].status = "";
-        taskContainer.classList.remove("checked");
-      } else {
-        status = tasks[i].status = "checked";
-        taskContainer.classList.add("checked");
+  if (checkbox.classList.contains("checkbox")) {
+    for (let i = 0; i < tasks.length; i++) {
+      if (tasks[i].id == taskId) {
+        if (tasks[i].status === "checked") {
+          status = tasks[i].status = "";
+          taskCont.classList.remove("checked");
+        } else {
+          status = tasks[i].status = "checked";
+          taskCont.classList.add("checked");
+        }
       }
     }
   }
+
   saveTasksToLocalStorage();
-}
+});
 
 // EDIT TASK NAME
 
