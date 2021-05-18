@@ -26,7 +26,7 @@ function getMobileOperatingSystem() {
 
 // MENU OPEN
 
-const body = document.getElementsByTagName("BODY")[0];
+// const body = document.getElementsByTagName("BODY")[0];
 
 const hamburger = document.querySelector(".hamburger");
 const nav = document.getElementById("nav-bar");
