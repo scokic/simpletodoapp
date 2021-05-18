@@ -54,6 +54,12 @@ const cancelNewTaskModal = document.querySelector(".cancel-new-task-modal");
 
 let tasks = [];
 
+//test
+
+newTaskFormInput.addEventListener("click", () => {
+  event.preventDefault();
+});
+
 // APP INITIALIZATION
 
 readTasksFromLocalStorage();
@@ -128,15 +134,19 @@ newTaskBtn.addEventListener("click", () => {
 
 cancelNewTask.addEventListener("click", () => {
   event.preventDefault();
+  const button = newTaskContainer.children[1].children[1].children[0];
   newTaskContainer.classList.remove("new-task-form-open");
   newTaskFormInput.value = "";
   newTaskModal.classList.add("hidden");
+  button.classList.add("disabled-button");
 });
 
 newTaskContainer.addEventListener("keydown", () => {
   if (event.key === "Escape") {
     newTaskContainer.classList.remove("new-task-form-open");
     newTaskFormInput.value = "";
+    const button = newTaskContainer.children[1].children[1].children[0];
+    button.classList.add("disabled-button");
   }
 });
 
@@ -202,6 +212,8 @@ newTaskModalClose.addEventListener("click", hideNewTaskModal);
 function hideNewTaskModal() {
   newTaskModal.classList.add("hidden");
   newTaskModalInput.value = "";
+  const button = newTaskModal.children[1].children[0].children[2].children[0];
+  button.classList.add("disabled-button");
 }
 
 function closeNewTaskModal() {
@@ -264,20 +276,20 @@ function addNewTaskModal() {
 function disableButton() {
   if (newTaskFormInput.value !== "") {
     addNewTaskBtn.classList.remove("disabled-button");
-    newTaskForm.addEventListener("click", addNewTask);
+    newTaskForm.addEventListener("submit", addNewTask);
   } else {
     addNewTaskBtn.classList.add("disabled-button");
-    newTaskForm.removeEventListener("click", addNewTask);
+    newTaskForm.removeEventListener("submit", addNewTask);
   }
 }
 
 function disableModalButton() {
   if (newTaskModalInput.value !== "") {
     addNewTaskBtnModal.classList.remove("disabled-button");
-    newTaskModalForm.addEventListener("click", addNewTaskModal);
+    newTaskModalForm.addEventListener("submit", addNewTaskModal);
   } else {
     addNewTaskBtnModal.classList.add("disabled-button");
-    newTaskModalForm.removeEventListener("click", addNewTaskModal);
+    newTaskModalForm.removeEventListener("submit", addNewTaskModal);
   }
 }
 
@@ -299,6 +311,7 @@ taskList.addEventListener("click", function (e) {
 
   if (editTaskButton.className == "edit-task-button") {
     const taskWrapper = e.target.parentElement.parentElement.parentElement;
+    const button = taskWrapper.children[1].children[1];
 
     if (!taskWrapper.classList.contains("edit-open")) {
     } else {
@@ -306,9 +319,11 @@ taskList.addEventListener("click", function (e) {
         task.classList.remove("edit-open");
       });
       taskWrapper.classList.add("edit-open");
+      button.classList.add("disabled-button");
     }
   } else if (taskName.className == "task-name") {
     const taskWrapper = e.target.parentElement.parentElement;
+    const button = taskWrapper.children[1].children[1];
 
     if (!taskWrapper.classList.contains("edit-open")) {
     } else {
@@ -316,6 +331,7 @@ taskList.addEventListener("click", function (e) {
         task.classList.remove("edit-open");
       });
       taskWrapper.classList.add("edit-open");
+      button.classList.add("disabled-button");
     }
   }
 });
@@ -390,15 +406,25 @@ function applyChange(submitEvent) {
 }
 
 function cancelChange(cancelEvent) {
-  cancelEvent.parentElement.children[0].value = "";
-  cancelEvent.parentElement.parentElement.classList.remove("edit-open");
+  const input = cancelEvent.parentElement.children[0];
+  const button = cancelEvent.parentElement.children[1];
+  const taskCont = cancelEvent.parentElement.parentElement;
+
+  taskCont.classList.remove("edit-open");
+  input.value = "";
+  button.classList.add("disabled-button");
   event.preventDefault();
 }
 
 function changeCancelOnKeydown(input) {
   if (event.key === "Escape") {
     input.value = "";
-    input.parentElement.parentElement.classList.remove("edit-open");
+
+    const taskCont = input.parentElement.parentElement;
+    const button = input.parentElement.children[1];
+
+    taskCont.classList.remove("edit-open");
+    button.classList.add("disabled-button");
     event.preventDefault();
   }
 }
@@ -427,7 +453,7 @@ function hideCompletedTasks() {
   showAllTasksBtn.classList.remove("hidden");
 }
 
-// LOCAL STORAGE
+// SAVING AND READING TASKS TO AND FROM LOCAL STORAGE
 
 function saveTasksToLocalStorage() {
   var str = JSON.stringify(tasks);

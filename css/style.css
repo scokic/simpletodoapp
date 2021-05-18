@@ -669,6 +669,7 @@ input[type="text"]:focus-visible {
 
 .disabled-button {
   background-color: var(--accent-light) !important;
+  cursor: not-allowed !important;
 }
 
 /* -------------------------- NEW TASK MODAL --------------------------*/
