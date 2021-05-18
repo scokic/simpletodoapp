@@ -20,6 +20,7 @@ body {
   --surface-shadow: 0px 0px 10px var(--surface-shadow-color);
 
   --menu-width: 250px;
+  -webkit-tap-highlight-color: transparent;
 }
 
 body.dark {
@@ -335,17 +336,38 @@ body.dark .dark-theme-toggle-circle {
 }
 
 @media only screen and (max-width: 700px) {
+  .top-nav {
+    background-color: var(--accent);
+    height: 50px;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    position: fixed;
+  }
+
   .open-menu {
     left: 0;
     z-index: 99;
   }
 
   .hamburger-mobile {
+    position: relative !important;
     display: flex;
-    margin-top: 15px;
   }
-  .open-menu .hamburger-mobile {
-    left: calc(var(--menu-width) + 20px);
+
+  .open-menu ~ .top-nav .hamburger-mobile {
+    margin-left: var(--menu-width) !important;
+  }
+}
+
+@media screen and (display-mode: standalone) {
+  .top-nav {
+    padding-top: 50px;
+    height: 100px;
+  }
+
+  main {
+    padding-top: 120px !important;
   }
 }
 
@@ -390,7 +412,7 @@ h2 i {
 @media screen and (max-width: 700px) {
   main {
     padding: 10px;
-    padding-top: 20px;
+    padding-top: 60px;
   }
   main h2 {
     display: inline;
@@ -405,7 +427,7 @@ h2 i {
     display: inline;
     margin: auto;
     margin-left: 0;
-    transform: translateX(50px);
+    transform: translateX(10px);
     z-index: 10;
   }
 }
@@ -424,11 +446,11 @@ h2 i {
   height: 3px;
   width: 100%;
   border-radius: 2px;
-  background-color: var(--text);
+  background-color: white;
   transition: 0.5s cubic-bezier(0.5, -1, 0.5, 1.5);
 }
 
-.open-menu .bar-1 {
+.open-menu ~ .top-nav .bar-1 {
   transform: rotate(-45deg) translate(-6px, 6.5px);
   -webkit-transform: rotate(-45deg) translate(-6px, 6.5px);
   -moz-transform: rotate(-360deg) translate(-6px, 6.5px);
@@ -436,7 +458,7 @@ h2 i {
   -o-transform: rotate(-360deg) translate(-6px, 6.5px);
 }
 
-.open-menu .bar-2 {
+.open-menu ~ .top-nav .bar-2 {
   transform: translateX(-15px);
   -webkit-transform: translateX(-15px);
   -moz-transform: translateX(-15px);
@@ -446,7 +468,7 @@ h2 i {
   box-shadow: none;
 }
 
-.open-menu .bar-3 {
+.open-menu ~ .top-nav .bar-3 {
   transform: rotate(45deg) translate(-6px, -6.5px);
   -webkit-transform: rotate(45deg) translate(-6px, -6.5px);
   -moz-transform: rotate(360deg) translate(-6px, -6.5px);
@@ -500,6 +522,14 @@ h2 i {
   padding: 15px 10px;
 }
 
+.new-task-button-global {
+  box-shadow: var(--surface-shadow);
+}
+
+.new-task-modal i:hover {
+  background-color: var(--text-active);
+}
+
 .new-task-button svg {
   height: 17px;
   width: 17px;
@@ -537,7 +567,7 @@ input[type="text"] {
   display: block;
   box-sizing: border-box;
   width: 100%;
-  padding: 10px;
+  padding: 7.5px 10px;
   border-radius: 5px;
   background-color: var(--background);
   color: var(--text);
@@ -614,8 +644,8 @@ input[type="text"]:focus-visible {
   bottom: 25px;
   right: 25px;
   display: grid;
-  width: 40px;
-  height: 40px;
+  width: 45px;
+  height: 45px;
   place-items: center;
   text-decoration: none;
   color: white;
@@ -623,6 +653,7 @@ input[type="text"]:focus-visible {
   background-color: var(--accent);
   border-radius: 50px;
   cursor: pointer;
+  transition: 0.35s ease;
 }
 
 .new-task-modal-form {
@@ -813,6 +844,10 @@ input[type="text"]:focus-visible {
   border-radius: 5px;
 }
 
+.task-filter-toggle::before {
+  color: var(--text-light);
+}
+
 .task-filter-toggle:hover {
   background-color: var(--background-hover);
   color: var(--accent);
@@ -820,6 +855,7 @@ input[type="text"]:focus-visible {
 
 .task-filter-modal {
   position: absolute;
+  padding: 0;
   right: 0;
   width: 200px;
   background-color: var(--background-2);
