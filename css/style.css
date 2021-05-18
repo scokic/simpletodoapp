@@ -375,6 +375,10 @@ body.dark .dark-theme-toggle-circle {
   .open-menu ~ .top-nav .hamburger-mobile {
     margin-left: var(--menu-width) !important;
   }
+
+  .bar {
+    background-color: white !important;
+  }
 }
 
 @media screen and (display-mode: standalone) {
@@ -395,14 +399,17 @@ body.dark .dark-theme-toggle-circle {
 
   .android .top-nav {
     padding-top: 10px !important;
-    height: 50px !important;
+    height: 60px !important;
   }
 
   .android #nav-bar {
     padding-top: 10px !important;
   }
-}
 
+  .android main {
+    padding-top: 70px !important;
+  }
+}
 /* -------------------------- MAIN CONTENT --------------------------*/
 
 main {
@@ -478,7 +485,7 @@ h2 {
   height: 3px;
   width: 100%;
   border-radius: 2px;
-  background-color: white;
+  background-color: var(--text);
   transition: 0.5s cubic-bezier(0.5, -1, 0.5, 1.5);
 }
 
@@ -858,7 +865,6 @@ input[type="text"]:focus-visible {
   main {
     margin-left: 0;
     width: auto;
-    /* padding-top: 50px; */
     height: 100vh;
   }
 }
