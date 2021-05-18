@@ -21,6 +21,7 @@ body {
 
   --menu-width: 275px;
   -webkit-tap-highlight-color: transparent;
+  overflow: hidden;
 }
 
 body.dark {
@@ -333,6 +334,14 @@ body.dark .dark-theme-toggle-circle {
   display: none;
   left: 20px;
   transition: 0.35s ease;
+}
+
+.home-container h2 {
+  margin: 0;
+}
+
+.top-nav {
+  display: none;
 }
 
 @media only screen and (max-width: 700px) {
