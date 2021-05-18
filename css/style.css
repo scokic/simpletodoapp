@@ -171,7 +171,7 @@ header a:hover {
 
 @media only screen and (max-width: 700px) {
   .settings-modal {
-    bottom: 155;
+    bottom: 75px;
   }
 
   ::-webkit-scrollbar {
