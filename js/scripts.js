@@ -71,36 +71,36 @@ function openSettings() {
 function readTasks(input) {
   taskList.innerHTML = "";
 
-  input.forEach((task) =>
+  input.forEach((task) => {
     taskList.insertAdjacentHTML(
       "afterbegin",
       `<li class="task-container ${task.status}" id="${task.id}">
       <div class="task-info-container">
-        <input
-          type="checkbox"
-          ${task.status}
-          onchange="handleChange(this)" class="task-checkbox"
-        />
-        <p class="task-name" onclick="editTask(this)">${task.name}</p>
-        <button class="edit-task-button" onclick="editTask(this)">
-          <i class="fas fa-pen"></i>
-        </button>
-        <button class="delete-task-button" onclick="deleteTask(this)">
-          <i class="fas fa-trash"></i>
-        </button>
+      <input
+      type="checkbox"
+      ${task.status}
+      onchange="handleChange(this)" class="task-checkbox"
+      />
+      <p class="task-name" onclick="editTask(this)">${task.name}</p>
+      <button class="edit-task-button" onclick="editTask(this)">
+      <i class="fas fa-pen"></i>
+      </button>
+      <button class="delete-task-button" onclick="deleteTask(this)">
+      <i class="fas fa-trash"></i>
+      </button>
       </div>
       <form class="task-edit-container">
-        <input class="edit-task-input" type="text" placeholder="Enter todo name" onkeydown="changeCancelOnKeydown(this)" onkeypress="toggleSidebarShortcut()"/>
-        <button class="apply-button disabled-button" onclick="applyChange(this)">
-        Apply
-        </button>
-        <button class="cancel-button" onclick="cancelChange(this)">
-          Cancel
-        </button>
+      <input class="edit-task-input" type="text" placeholder="Enter todo name" onkeydown="changeCancelOnKeydown(this)" onkeypress="toggleSidebarShortcut()"/>
+      <button class="apply-button disabled-button" onclick="applyChange(this)">
+      Apply
+      </button>
+      <button class="cancel-button" onclick="cancelChange(this)">
+      Cancel
+      </button>
       </form>
-    </li>`
-    )
-  );
+      </li>`
+    );
+  });
 
   hideCompleteBtn.classList.remove("hidden");
   showAllTasksBtn.classList.add("hidden");
@@ -437,4 +437,10 @@ const taskFilterModal = document.querySelector(".task-filter-modal");
 
 taskFilterToggle.addEventListener("click", () => {
   taskFilterModal.classList.toggle("open");
+});
+
+const taskFilterModalClose = document.querySelector(".task-filter-modal-close");
+
+taskFilterModalClose.addEventListener("click", () => {
+  taskFilterModal.classList.remove("open");
 });

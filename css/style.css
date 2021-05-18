@@ -57,6 +57,7 @@ body.dark {
 body {
   margin: 0;
   font-size: 16px;
+  background-color: var(--background);
 }
 
 h1,
@@ -213,6 +214,7 @@ header a:hover {
   }
 
   .hamburger-desktop {
+    top: calc(25px + 5px);
     transition: 0.35s ease;
     display: flex;
     position: relative;
@@ -281,13 +283,19 @@ header a:hover {
     left: -100%;
     transition: 0.4s ease;
     box-shadow: var(--surface-shadow);
-    padding-top: 50px;
     padding-bottom: 150px;
   }
 
   .settings {
-    position: absolute;
+    position: fixed;
     bottom: 25px;
+    left: -270px;
+    width: calc(var(--menu-width) - 20px);
+    transition: 0.4s ease;
+  }
+
+  .open-menu .settings {
+    left: 10px;
   }
 }
 
@@ -323,6 +331,7 @@ body.dark .dark-theme-toggle-circle {
 .hamburger-mobile {
   display: none;
   left: 20px;
+  transition: 0.35s ease;
 }
 
 @media only screen and (max-width: 700px) {
@@ -333,6 +342,10 @@ body.dark .dark-theme-toggle-circle {
 
   .hamburger-mobile {
     display: flex;
+    margin-top: 15px;
+  }
+  .open-menu .hamburger-mobile {
+    left: calc(var(--menu-width) + 20px);
   }
 }
 
@@ -349,7 +362,7 @@ main {
 }
 
 .header-container {
-  margin: 10px;
+  margin-left: 10px;
 }
 
 h2 {
@@ -377,11 +390,23 @@ h2 i {
 @media screen and (max-width: 700px) {
   main {
     padding: 10px;
+    padding-top: 20px;
+  }
+  main h2 {
+    display: inline;
   }
 
   .open-menu ~ .nav-close {
     display: block;
     z-index: 5;
+  }
+
+  .header-container {
+    display: inline;
+    margin: auto;
+    margin-left: 0;
+    transform: translateX(50px);
+    z-index: 10;
   }
 }
 
@@ -391,7 +416,6 @@ h2 i {
   flex-direction: column;
   justify-content: space-between;
   position: fixed;
-  top: 15px;
   z-index: 9999;
   cursor: pointer;
 }
@@ -771,7 +795,7 @@ input[type="text"]:focus-visible {
   main {
     margin-left: 0;
     width: auto;
-    padding-top: 50px;
+    /* padding-top: 50px; */
     height: 100vh;
   }
 }
@@ -786,6 +810,7 @@ input[type="text"]:focus-visible {
   padding: 10px;
   margin-top: 10px;
   cursor: pointer;
+  border-radius: 5px;
 }
 
 .task-filter-toggle:hover {
@@ -808,4 +833,14 @@ input[type="text"]:focus-visible {
 
 .task-filter-modal.open {
   display: block;
+}
+
+.task-filter-modal.open ~ .task-filter-modal-close {
+  height: 100vh;
+  width: 100vw;
+  position: fixed;
+  top: 0;
+  left: 0;
+  background-color: var(--on-background);
+  transition: 0.2s ease;
 }
