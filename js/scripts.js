@@ -435,12 +435,14 @@ function hideCompletedTasks() {
   taskList.classList.add("hide-complete-tasks");
   hideCompleteBtn.classList.add("hidden");
   showAllTasksBtn.classList.remove("hidden");
+  taskFilterModal.classList.remove("open");
 }
 
 function showAllTasks() {
   taskList.classList.remove("hide-complete-tasks");
   hideCompleteBtn.classList.remove("hidden");
   showAllTasksBtn.classList.add("hidden");
+  taskFilterModal.classList.remove("open");
 }
 
 // SAVING AND READING TASKS TO AND FROM LOCAL STORAGE
@@ -529,16 +531,19 @@ function sortTasksAToZ() {
   let azTasks = tasks.sort(sortAtoZ);
   event.preventDefault();
   readTasks(azTasks);
+  taskSortModal.classList.remove("open");
 }
 
 function sortTasksZtoA() {
   let zaTasks = tasks.sort(sortZtoA);
   event.preventDefault();
   readTasks(zaTasks);
+  taskSortModal.classList.remove("open");
 }
 
 function sortTasksDoneBottom() {
   let doneTasksList = tasks.sort(doneTasksBottom);
   event.preventDefault();
   readTasks(doneTasksList);
+  taskSortModal.classList.remove("open");
 }
