@@ -164,9 +164,21 @@
             <i class="task-sort-toggle fas fa-exchange-alt"></i>
             <div class="task-sort-modal modal">
               <ul>
-                <li><a href="" onclick="sortTasksAToZ()">A to Z</a></li>
-                <li><a href="" onclick="sortTasksZtoA()">Z to A</a></li>
-                <li><a href="" onclick="sortTasksDoneBottom()">Status</a></li>
+                <li>
+                  <a href="" onclick="sortTasksAToZ()"
+                    ><i class="fas fa-sort-alpha-down"></i>Sort from A to Z</a
+                  >
+                </li>
+                <li>
+                  <a href="" onclick="sortTasksZtoA()"
+                    ><i class="fas fa-sort-alpha-up"></i>Sort from Z to A</a
+                  >
+                </li>
+                <li>
+                  <a href="" onclick="sortTasksDoneBottom()"
+                    ><i class="far fa-check-circle"></i>Sort by status</a
+                  >
+                </li>
               </ul>
             </div>
             <div class="task-sort-modal-close"></div>
@@ -180,13 +192,13 @@
                     class="hide-completed-filter"
                     onclick="hideCompletedTasks()"
                   >
-                    Hide completed
+                    <i class="far fa-circle"></i>Hide completed
                   </a>
                 </li>
 
                 <li>
                   <a class="show-all-filter" onclick="showAllTasks()">
-                    Show completed
+                    <i class="far fa-check-circle"></i>Show completed
                   </a>
                 </li>
               </ul>

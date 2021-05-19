@@ -196,8 +196,8 @@ header a:hover {
 }
 
 .modal li a {
-  padding-left: 33px;
-  padding-right: 33px;
+  padding-left: 20px;
+  padding-right: 20px;
 }
 
 .settings-modal-close,
@@ -403,7 +403,7 @@ body.dark .dark-theme-toggle-circle {
   }
 
   #nav-bar {
-    padding-top: 100px;
+    padding-top: 60px;
     z-index: 999;
   }
 
@@ -544,6 +544,7 @@ h2 {
   border-radius: 5px;
   cursor: pointer;
   font-size: 1em;
+  text-decoration: none;
 }
 
 .hide-completed-filter:hover,
@@ -925,8 +926,7 @@ input[type="text"]:focus-visible {
 }
 
 .task-filter-toggle,
-.task-sort-toggle,
-.task-sort-modal a {
+.task-sort-toggle {
   padding: 10px;
   margin-top: 10px;
   cursor: pointer;
@@ -970,6 +970,7 @@ input[type="text"]:focus-visible {
 .task-filter-modal.open,
 .task-sort-modal.open {
   display: block;
+  z-index: 999;
 }
 
 .task-filter-modal.open ~ .task-filter-modal-close,
@@ -981,8 +982,14 @@ input[type="text"]:focus-visible {
   left: 0;
   background-color: var(--on-background);
   transition: 0.2s ease;
+  z-index: 888;
 }
 
 .hide-complete-tasks .checked {
   display: none;
+}
+
+.task-sort i,
+.task-filter i {
+  margin-right: 10px;
 }
