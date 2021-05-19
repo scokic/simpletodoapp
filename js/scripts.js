@@ -26,8 +26,6 @@ function getMobileOperatingSystem() {
 
 // MENU OPEN
 
-// const body = document.getElementsByTagName("BODY")[0];
-
 const hamburger = document.querySelector(".hamburger");
 const nav = document.getElementById("nav-bar");
 const settingsBtn = document.querySelector(".settings");
@@ -94,7 +92,7 @@ function readTasks(input) {
       "afterbegin",
       `<li class="task-container ${task.status}" id="${task.id}">
       <div class="task-info-container">
-      <div class="checkbox task-checkbox ${task.status}" onchange="handleChange(this)"><i class="fas fa-check"></i></div>
+      <div class="checkbox task-checkbox" onchange="handleChange(this)"><i class="fas fa-check"></i></div>
       <p class="task-name" onclick="editTask(this)">${task.name}</p>
       <button class="edit-task-button" onclick="editTask(this)">
       <i class="fas fa-pen"></i>
@@ -116,8 +114,8 @@ function readTasks(input) {
     );
   });
 
-  hideCompleteBtn.classList.remove("hidden");
-  showAllTasksBtn.classList.add("hidden");
+  hideCompleteBtn.classList.add("hidden");
+  showAllTasksBtn.classList.remove("hidden");
 }
 
 // CREATE NEW TASK
@@ -159,7 +157,7 @@ function addNewTask() {
       "afterbegin",
       `<li class="task-container" id="${newTask.id}">
       <div class="task-info-container">
-      <div class="checkbox task-checkbox ${newTask.status}" onchange="handleChange(this)"><i class="fas fa-check"></i></div>
+      <div class="checkbox task-checkbox" onchange="handleChange(this)"><i class="fas fa-check"></i></div>
         <p class="task-name" onclick="editTask(this)">${newTask.name}</p>
         <button class="edit-task-button" onclick="editTask(this)">
           <i class="fas fa-pen"></i>
@@ -229,7 +227,7 @@ function addNewTaskModal() {
       "afterbegin",
       `<li class="task-container" id="${newTask.id}">
       <div class="task-info-container">
-      <div class="checkbox task-checkbox ${newTask.status}" onchange="handleChange(this)"><i class="fas fa-check"></i></div>
+      <div class="checkbox task-checkbox" onchange="handleChange(this)"><i class="fas fa-check"></i></div>
         <p class="task-name" onclick="editTask(this)">${newTask.name}</p>
         <button class="edit-task-button" onclick="editTask(this)">
           <i class="fas fa-pen"></i>
@@ -434,19 +432,15 @@ function toggleSidebarShortcut() {
 // FILTER COMPLETED TASKS
 
 function hideCompletedTasks() {
-  let i;
-  let notCompletedTasks = [];
-
-  for (i = 0; i < tasks.length; i++) {
-    if (tasks[i].status === "") {
-      notCompletedTasks.push(tasks[i]);
-    }
-  }
-
-  taskList.innerHTML = "";
-  readTasks(notCompletedTasks);
+  taskList.classList.add("hide-complete-tasks");
   hideCompleteBtn.classList.add("hidden");
   showAllTasksBtn.classList.remove("hidden");
+}
+
+function showAllTasks() {
+  taskList.classList.remove("hide-complete-tasks");
+  hideCompleteBtn.classList.remove("hidden");
+  showAllTasksBtn.classList.add("hidden");
 }
 
 // SAVING AND READING TASKS TO AND FROM LOCAL STORAGE

@@ -778,6 +778,7 @@ input[type="text"]:focus-visible {
 
 .tasks-container {
   overflow-y: scroll;
+  padding-left: 0;
 }
 
 .task-info-container,
@@ -786,6 +787,11 @@ input[type="text"]:focus-visible {
   align-items: center;
   padding: 10px;
   border-radius: 5px;
+}
+
+.task-info-container {
+  display: grid;
+  grid-template-columns: 30px 1fr 30px 30px;
 }
 
 .task-container {
@@ -932,7 +938,6 @@ input[type="text"]:focus-visible {
   position: absolute;
   padding: 0;
   right: 0;
-  width: 200px;
   background-color: var(--background-2);
   display: none;
 }
@@ -940,6 +945,7 @@ input[type="text"]:focus-visible {
 .task-filter-modal a {
   display: block;
   margin: 0;
+  white-space: nowrap;
 }
 
 .task-filter-modal.open {
@@ -954,4 +960,8 @@ input[type="text"]:focus-visible {
   left: 0;
   background-color: var(--on-background);
   transition: 0.2s ease;
+}
+
+.hide-complete-tasks .checked {
+  display: none;
 }
