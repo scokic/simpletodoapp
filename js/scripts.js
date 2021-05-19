@@ -52,8 +52,6 @@ const cancelNewTaskModal = document.querySelector(".cancel-new-task-modal");
 
 let tasks = [];
 
-//test
-
 newTaskFormInput.addEventListener("click", () => {
   event.preventDefault();
 });
@@ -87,7 +85,9 @@ function openSettings() {
 function readTasks(input) {
   taskList.innerHTML = "";
 
-  input.forEach((task) => {
+  let sortedTasks = input.sort(doneTasksBottom);
+
+  sortedTasks.forEach((task) => {
     taskList.insertAdjacentHTML(
       "afterbegin",
       `<li class="task-container ${task.status}" id="${task.id}">
@@ -472,3 +472,73 @@ const taskFilterModalClose = document.querySelector(".task-filter-modal-close");
 taskFilterModalClose.addEventListener("click", () => {
   taskFilterModal.classList.remove("open");
 });
+
+// TASK SORT TOGGLE
+
+const taskSortToggle = document.querySelector(".task-sort-toggle");
+const taskSortModal = document.querySelector(".task-sort-modal");
+
+taskSortToggle.addEventListener("click", () => {
+  taskSortModal.classList.toggle("open");
+});
+
+const taskSortModalClose = document.querySelector(".task-sort-modal-close");
+
+taskSortModalClose.addEventListener("click", () => {
+  taskSortModal.classList.remove("open");
+});
+
+// TASK SORT FILTER
+
+function sortAtoZ(a, b) {
+  let A = a.name.toLowerCase(),
+    B = b.name.toLowerCase();
+  if (B < A) {
+    return -1;
+  }
+  if (B > A) {
+    return 1;
+  }
+  return 0;
+}
+
+function sortZtoA(a, b) {
+  let A = a.name.toLowerCase(),
+    B = b.name.toLowerCase();
+
+  if (A < B) {
+    return -1;
+  }
+  if (A > B) {
+    return 1;
+  }
+  return 0;
+}
+
+function doneTasksBottom(a, b) {
+  if (b.status < a.status) {
+    return -1;
+  }
+  if (b.status > a.status) {
+    return 1;
+  }
+  return 0;
+}
+
+function sortTasksAToZ() {
+  let azTasks = tasks.sort(sortAtoZ);
+  event.preventDefault();
+  readTasks(azTasks);
+}
+
+function sortTasksZtoA() {
+  let zaTasks = tasks.sort(sortZtoA);
+  event.preventDefault();
+  readTasks(zaTasks);
+}
+
+function sortTasksDoneBottom() {
+  let doneTasksList = tasks.sort(doneTasksBottom);
+  event.preventDefault();
+  readTasks(doneTasksList);
+}

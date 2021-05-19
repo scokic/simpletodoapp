@@ -164,6 +164,10 @@ header a:hover {
   z-index: 99;
 }
 
+.modal ul {
+  padding-left: 0;
+}
+
 .settings-modal {
   position: fixed;
   display: none;
@@ -527,11 +531,12 @@ h2 {
 .task-and-filter-container {
   display: grid;
   margin: 10px;
-  grid-template-columns: 1fr auto;
+  grid-template-columns: 1fr auto auto;
 }
 
 .hide-completed-filter,
-.show-all-filter {
+.show-all-filter,
+.task-sort-modal a {
   margin-top: 5px;
   margin-bottom: auto;
   margin-right: 20px;
@@ -914,27 +919,40 @@ input[type="text"]:focus-visible {
 
 /* -------------------------- TASK FILTER --------------------------*/
 
-.task-filter {
+.task-filter,
+.task-sort {
   position: relative;
 }
 
-.task-filter-toggle {
+.task-filter-toggle,
+.task-sort-toggle,
+.task-sort-modal a {
   padding: 10px;
   margin-top: 10px;
   cursor: pointer;
   border-radius: 5px;
+  text-decoration: none;
+  color: white;
 }
 
-.task-filter-toggle::before {
+.task-sort-toggle {
+  transform: rotate(90deg);
+}
+
+.task-filter-toggle::before,
+.task-sort-toggle::before {
   color: var(--text-light);
 }
 
-.task-filter-toggle:hover {
+.task-filter-toggle:hover,
+.task-sort-toggle:hover,
+.task-sort-modal a:hover {
   background-color: var(--background-hover);
   color: var(--accent);
 }
 
-.task-filter-modal {
+.task-filter-modal,
+.task-sort-modal {
   position: absolute;
   padding: 0;
   right: 0;
@@ -942,17 +960,20 @@ input[type="text"]:focus-visible {
   display: none;
 }
 
-.task-filter-modal a {
+.task-filter-modal a,
+.task-sort-modal a {
   display: block;
   margin: 0;
   white-space: nowrap;
 }
 
-.task-filter-modal.open {
+.task-filter-modal.open,
+.task-sort-modal.open {
   display: block;
 }
 
-.task-filter-modal.open ~ .task-filter-modal-close {
+.task-filter-modal.open ~ .task-filter-modal-close,
+.task-sort-modal.open ~ .task-sort-modal-close {
   height: 100vh;
   width: 100vw;
   position: fixed;
