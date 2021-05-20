@@ -66,13 +66,9 @@ function toggleMobileNav() {
   nav.classList.toggle("open-menu");
 }
 
-// TOGGLE SIDEBAR
-
 function toggleSidebar() {
   nav.classList.toggle("nav-hidden-desktop");
 }
-
-// OPEN SETTINGS MENU
 
 function openSettings() {
   settingsBtn.classList.toggle("open");
@@ -82,22 +78,17 @@ function openSettings() {
 
 // READ EXISTING TASKS
 
-function readTasks(input) {
-  taskList.innerHTML = "";
-
-  let sortedTasks = input.sort(doneTasksBottom);
-
-  sortedTasks.forEach((task) => {
-    taskList.insertAdjacentHTML(
-      "afterbegin",
-      `<li class="task-container ${task.status} ${
-        task.status === "checked" ? "hidden" : ""
-      }" id="${task.id}">
+function printTask(input) {
+  taskList.insertAdjacentHTML(
+    "afterbegin",
+    `<li class="task-container ${input.status} ${
+      input.status === "checked" ? "hidden" : ""
+    }" id="${input.id}">
       <div class="task-info-container">
       <div class="checkbox-container">
         <div class="checkbox task-checkbox" onchange="handleChange(this)"><i class="fas fa-check"></i></div>
       </div>
-      <p class="task-name" onclick="editTask(this)">${task.name}</p>
+      <p class="task-name" onclick="editTask(this)">${input.name}</p>
       <button class="edit-task-button" onclick="editTask(this)">
       <i class="fas fa-pen"></i>
       </button>
@@ -115,7 +106,14 @@ function readTasks(input) {
       </button>
       </form>
       </li>`
-    );
+  );
+}
+
+function readTasks(input) {
+  taskList.innerHTML = "";
+  let sortedTasks = input.sort(doneTasksBottom);
+  sortedTasks.forEach((task) => {
+    printTask(task);
   });
 
   hideCompleteBtn.classList.add("hidden");
@@ -157,32 +155,7 @@ function addNewTask() {
       status: "",
     };
     tasks.push(newTask);
-    taskList.insertAdjacentHTML(
-      "afterbegin",
-      `<li class="task-container" id="${newTask.id}">
-      <div class="task-info-container">
-      <div class="checkbox-container">
-        <div class="checkbox task-checkbox" onchange="handleChange(this)"><i class="fas fa-check"></i></div>
-      </div>
-        <p class="task-name" onclick="editTask(this)">${newTask.name}</p>
-        <button class="edit-task-button" onclick="editTask(this)">
-          <i class="fas fa-pen"></i>
-        </button>
-        <button class="delete-task-button" onclick="deleteTask(this)">
-          <i class="fas fa-trash"></i>
-        </button>
-      </div>
-      <form class="task-edit-container">
-        <input class="edit-task-input" type="text" placeholder="Enter todo name" onkeydown="changeCancelOnKeydown(this)" onkeypress="toggleSidebarShortcut()"/>
-        <button class="apply-button" onclick="applyChange(this)">
-        Apply
-        </button>
-        <button class="cancel-button" onclick="cancelChange(this)">
-          Cancel
-        </button>
-      </form>
-    </li>`
-    );
+    printTask(newTask);
     saveTasksToLocalStorage();
   }
 
@@ -218,8 +191,6 @@ function closeNewTaskModal() {
   }
 }
 
-// THIS NEEDS TO BE CLEANED - Not following DRY
-
 function addNewTaskModal() {
   if (newTaskModalInput.value !== "") {
     const maxId = Math.max(...tasks.map((o) => o.id), 0);
@@ -229,32 +200,7 @@ function addNewTaskModal() {
       status: "",
     };
     tasks.push(newTask);
-    taskList.insertAdjacentHTML(
-      "afterbegin",
-      `<li class="task-container" id="${newTask.id}">
-      <div class="task-info-container">
-      <div class="checkbox-container">
-        <div class="checkbox task-checkbox" onchange="handleChange(this)"><i class="fas fa-check"></i></div>
-      </div>
-        <p class="task-name" onclick="editTask(this)">${newTask.name}</p>
-        <button class="edit-task-button" onclick="editTask(this)">
-          <i class="fas fa-pen"></i>
-        </button>
-        <button class="delete-task-button" onclick="deleteTask(this)">
-          <i class="fas fa-trash"></i>
-        </button>
-      </div>
-      <form class="task-edit-container">
-        <input class="edit-task-input" type="text" placeholder="Enter todo name" onkeydown="changeCancelOnKeydown(this)" onkeypress="toggleSidebarShortcut()"/>
-        <button class="apply-button" onclick="applyChange(this)">
-        Apply
-        </button>
-        <button class="cancel-button" onclick="cancelChange(this)">
-          Cancel
-        </button>
-      </form>
-    </li>`
-    );
+    printTask(newTask);
     saveTasksToLocalStorage();
     newTaskModal.classList.add("hidden");
     addNewTaskBtnModal.classList.add("disabled-button");
