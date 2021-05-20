@@ -501,7 +501,7 @@ h2 {
 
 @media screen and (max-width: 700px) {
   main {
-    padding: 10px;
+    padding: 0;
     padding-top: 60px;
   }
   main h2 {
@@ -805,13 +805,18 @@ input[type="text"]:focus-visible {
 .task-edit-container {
   display: flex;
   align-items: center;
-  padding: 10px;
+  padding: 10px 5px;
   border-radius: 5px;
 }
 
 .task-info-container {
   display: grid;
   grid-template-columns: 30px 1fr 30px 30px;
+}
+@media screen and (max-width: 700px) {
+  .task-info-container {
+    grid-template-columns: 25px 1fr 25px 25px;
+  }
 }
 
 .task-container {
@@ -847,17 +852,17 @@ input[type="text"]:focus-visible {
 .task-container .edit-task-button ::before,
 .task-container .delete-task-button ::before {
   border-radius: 5px;
-  padding: 7px;
+  padding: 5px;
 }
 
 .task-container .edit-task-button,
 .task-container .delete-task-button {
-  opacity: 0;
+  display: none;
 }
 
 .edit-open .edit-task-button,
 .edit-open .delete-task-button {
-  opacity: 1;
+  display: block;
 }
 
 @media only screen and (min-width: 701px) {
