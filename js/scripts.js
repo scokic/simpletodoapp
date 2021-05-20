@@ -90,9 +90,13 @@ function readTasks(input) {
   sortedTasks.forEach((task) => {
     taskList.insertAdjacentHTML(
       "afterbegin",
-      `<li class="task-container ${task.status}" id="${task.id}">
+      `<li class="task-container ${task.status} ${
+        task.status === "checked" ? "hidden" : ""
+      }" id="${task.id}">
       <div class="task-info-container">
-      <div class="checkbox task-checkbox" onchange="handleChange(this)"><i class="fas fa-check"></i></div>
+      <div class="checkbox-container">
+        <div class="checkbox task-checkbox" onchange="handleChange(this)"><i class="fas fa-check"></i></div>
+      </div>
       <p class="task-name" onclick="editTask(this)">${task.name}</p>
       <button class="edit-task-button" onclick="editTask(this)">
       <i class="fas fa-pen"></i>
@@ -157,7 +161,9 @@ function addNewTask() {
       "afterbegin",
       `<li class="task-container" id="${newTask.id}">
       <div class="task-info-container">
-      <div class="checkbox task-checkbox" onchange="handleChange(this)"><i class="fas fa-check"></i></div>
+      <div class="checkbox-container">
+        <div class="checkbox task-checkbox" onchange="handleChange(this)"><i class="fas fa-check"></i></div>
+      </div>
         <p class="task-name" onclick="editTask(this)">${newTask.name}</p>
         <button class="edit-task-button" onclick="editTask(this)">
           <i class="fas fa-pen"></i>
@@ -227,7 +233,9 @@ function addNewTaskModal() {
       "afterbegin",
       `<li class="task-container" id="${newTask.id}">
       <div class="task-info-container">
-      <div class="checkbox task-checkbox" onchange="handleChange(this)"><i class="fas fa-check"></i></div>
+      <div class="checkbox-container">
+        <div class="checkbox task-checkbox" onchange="handleChange(this)"><i class="fas fa-check"></i></div>
+      </div>
         <p class="task-name" onclick="editTask(this)">${newTask.name}</p>
         <button class="edit-task-button" onclick="editTask(this)">
           <i class="fas fa-pen"></i>
@@ -345,20 +353,28 @@ function deleteTask(event) {
 taskList.addEventListener(
   "click",
   function (e) {
-    const checkbox = e.target;
-    const taskCont = checkbox.parentElement.parentElement;
+    const clickTarget = e.target;
+    const taskCont = clickTarget.parentElement.parentElement;
     const taskId = taskCont.id;
     let status;
 
-    if (checkbox.classList.contains("checkbox")) {
+    if (clickTarget.classList.contains("checkbox-container")) {
       for (let i = 0; i < tasks.length; i++) {
         if (tasks[i].id == taskId) {
           if (tasks[i].status === "checked") {
             status = tasks[i].status = "";
             taskCont.classList.remove("checked");
+
+            setTimeout(() => {
+              taskCont.classList.remove("hidden");
+            }, 500);
           } else {
             status = tasks[i].status = "checked";
             taskCont.classList.add("checked");
+
+            setTimeout(() => {
+              taskCont.classList.add("hidden");
+            }, 500);
           }
         }
       }

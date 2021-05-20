@@ -687,20 +687,28 @@ input[type="text"]:focus-visible {
 
 /* -------------------------- CUSTOM CHECKBOX --------------------------*/
 
+.checkbox-container {
+  height: 125%;
+  width: 100%;
+  display: grid;
+  place-items: center;
+}
+
 .checkbox {
   height: 16px;
   width: 16px;
   border-radius: 5px;
-  border: 1px solid var(--accent);
+  border: 1.5px solid var(--accent);
   display: grid;
   place-items: center;
-  transition: 0.2s ease;
+  transition: 0.5s ease;
+  pointer-events: none;
 }
 
 .checked .checkbox {
   background-color: var(--accent);
-  transition: 0.2s ease;
 }
+
 .checkbox i {
   color: white;
   font-size: 0;
@@ -710,6 +718,12 @@ input[type="text"]:focus-visible {
 
 .checked .checkbox i {
   font-size: 0.6rem;
+}
+
+.tasks-container .checked {
+  opacity: 1;
+  height: auto;
+  margin: 5px 10px;
 }
 
 /* -------------------------- NEW TASK MODAL --------------------------*/
@@ -985,7 +999,7 @@ input[type="text"]:focus-visible {
   z-index: 888;
 }
 
-.hide-complete-tasks .checked {
+.hide-complete-tasks .hidden {
   display: none;
 }
 
