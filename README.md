@@ -13,7 +13,7 @@ Tools used:
 - HTML
 - CSS
 - JavaScript
-- GitHub
+- Git
 
 [Link to hosted app](https://scokic.github.io/simpletodoapp/) 
 
