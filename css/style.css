@@ -883,7 +883,7 @@ input[type="text"]:focus-visible {
 
   .task-container:hover .edit-task-button,
   .task-container:hover .delete-task-button {
-    opacity: 1;
+    display: block;
   }
 }
 

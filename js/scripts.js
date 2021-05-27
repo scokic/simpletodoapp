@@ -153,6 +153,7 @@ function addNewTask() {
       id: maxId + 1,
       name: `${newTaskFormInput.value}`,
       status: "",
+      list: "personal",
     };
     tasks.push(newTask);
     printTask(newTask);
